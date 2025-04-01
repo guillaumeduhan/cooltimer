@@ -10,18 +10,19 @@
   @apply outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:shadow-none #{!important};
 }
 
+html {
+  @apply bg-black;
+}
+
 
 body {
-  @apply text-woodsmoke-700 dark:text-woodsmoke-100 dark:bg-woodsmoke-950;
+  @apply bg-no-repeat text-woodsmoke-900 bg-white dark:text-woodsmoke-100 dark:bg-gradient-to-br dark:from-woodsmoke-950 dark:to-black;
   font-optical-sizing: auto;
   font-family: "Geist", serif;
   font-optical-sizing: auto;
   font-size: 16px;
 }
 
-h3 {
-  @apply text-lg;
-}
 
 a {
   @apply flex items-center gap-2 justify-between cursor-pointer transition duration-300;
@@ -40,12 +41,6 @@ a {
     &:hover {
       @apply text-woodsmoke-300;
     }
-  }
-}
-
-.auth {
-  h1 {
-    @apply text-[24px] font-[500];
   }
 }
 

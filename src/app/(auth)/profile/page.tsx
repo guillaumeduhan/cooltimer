@@ -51,19 +51,22 @@ export default function ProfilePage() {
         <CardTitle>Display name</CardTitle>
         <CardDescription>Please enter your full name, or a display name you are comfortable with.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="grid gap-1 group transition duration-300">
         <Input {...{
           type: "text",
           name: "display_name",
           value: data?.display_name || '',
           onChange: handleChange
         }} />
+        <div className="h-1">
+          <p className="hidden transition duration-300 cursor-pointer group-hover:flex text-xs text-woodsmoke-900 mb-0">{user.id}</p>
+        </div>
       </CardContent>
       <CardFooter>
         <ButtonComponent {...{
           loading,
           label: "Save",
-          onClick: () => saveUser({ metadata: data }),
+          onClick: () => saveUser({ user_metadata: data }),
           setUser
         }} />
       </CardFooter>
@@ -85,7 +88,7 @@ export default function ProfilePage() {
         <ButtonComponent {...{
           loading,
           label: "Save",
-          onClick: () => saveUser({ metadata: data }),
+          onClick: () => saveUser({ user_metadata: data }),
           setUser
         }} />
       </CardFooter>

@@ -47,7 +47,7 @@ export default function SettingsPage() {
             name="email_notifications"
             id="email_notifications"
             onCheckedChange={(b: boolean) => saveUser({
-              metadata: {
+              user_metadata: {
                 email_notifications: b
               }
             })}

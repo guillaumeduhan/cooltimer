@@ -51,6 +51,6 @@ export const useHelpers = () => {
     getDollars,
     openUrl,
     toDate,
-    setError
+    setError,
   };
 };

@@ -1,5 +1,5 @@
 "use client";
-import { STORAGE_KEYS } from "@/shared/constants";
+import { SITE_TITLE, STORAGE_KEYS } from "@/shared/constants";
 import React, {
   createContext,
   useCallback,
@@ -45,6 +45,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const start = useCallback(() => {
     if (!isRunning) {
       setIsRunning(true);
+      document.title = "Recording...";
       startTimeRef.current = Date.now() - elapsedTimeRef.current;
 
       intervalRef.current = window.setInterval(() => {
@@ -55,6 +56,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const pause = useCallback(() => {
     if (isRunning && intervalRef.current !== null) {
+      document.title = "Stopped ✋";
       clearInterval(intervalRef.current);
       intervalRef.current = null;
       setIsRunning(false);
@@ -65,6 +67,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const reset = useCallback(() => {
     pause();
     setTime(0);
+    document.title = SITE_TITLE;
     elapsedTimeRef.current = 0;
   }, [pause]);
 

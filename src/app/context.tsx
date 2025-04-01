@@ -4,6 +4,7 @@ import { User } from '@supabase/supabase-js';
 import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { v4 as uuidv4 } from 'uuid';
 
 interface UserMetadata {
   [key: string]: any;
@@ -14,7 +15,7 @@ interface AppContextType {
   loading: boolean;
   setLoading: (l: boolean) => void;
   setUser: (user: User | undefined) => void;
-  saveUser: (params: { metadata: UserMetadata }) => Promise<any>;
+  saveUser: (params: { user_metadata: UserMetadata }) => Promise<any>;
   logout: () => Promise<boolean>;
 }
 
@@ -47,20 +48,22 @@ export function AppWrapper({ children }: AppWrapperProps) {
     }
   };
 
-  const saveUser = async ({ metadata }: { metadata: UserMetadata }): Promise<any> => {
+  const saveUser = async ({ user_metadata }: { user_metadata: UserMetadata }): Promise<any> => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.auth.updateUser({
-        data: metadata
-      });
+      setUser((prev: any) => ({ ...prev, user_metadata }));
 
-      if (error) throw error;
+      // const { data, error } = await supabase.auth.updateUser({
+      //   data: user_metadata
+      // });
 
-      if (data?.user) {
-        setUser(data.user);
-        toast.success('Profile saved successfully!');
-        return data;
-      }
+      // if (error) throw error;
+
+      // if (data?.user) {
+      //   setUser(data.user);
+      //   toast.success('Profile saved successfully!');
+      //   return data;
+      // }
     } catch (error) {
       toast.error('Sorry, something wrong happened. Please try again.');
       throw error;
@@ -69,14 +72,58 @@ export function AppWrapper({ children }: AppWrapperProps) {
     }
   };
 
+  const createTempUser = () => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      return setUser(JSON.parse(storedUser));
+    }
+    const id = uuidv4();
+
+    function generateRandomName() {
+      const adjectives = [
+        "quick", "lazy", "sleepy", "noisy", "hungry", "brave", "shy", "clever", "silly", "graceful",
+        "curious", "gentle", "happy", "sad", "angry", "proud", "bright", "dark", "silent", "fancy",
+        "cool", "calm", "bold", "friendly", "loyal", "eager", "zany", "witty", "sharp", "quiet",
+        "tough", "kind", "nervous", "funny", "crazy", "jolly", "grumpy", "sneaky", "bouncy", "chilly",
+        "fierce", "soft", "wild", "tiny", "giant", "nimble", "swift", "clumsy", "dizzy", "mighty"
+      ];
+
+      const nouns = [
+        "tiger", "lion", "bear", "fox", "eagle", "shark", "dragon", "panther", "wolf", "leopard",
+        "owl", "koala", "zebra", "moose", "falcon", "whale", "octopus", "penguin", "crab", "phoenix",
+        "rabbit", "giraffe", "monkey", "donkey", "swan", "buffalo", "beetle", "rhino", "lobster", "antelope",
+        "camel", "duck", "lizard", "panda", "squid", "bat", "yak", "boar", "sloth", "iguana",
+        "seahorse", "crow", "goat", "chimp", "cobra", "flamingo", "porcupine", "puma", "toad", "hyena"
+      ];
+
+      const randomItem = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
+
+      return `${randomItem(adjectives)}-${randomItem(adjectives)}-${randomItem(nouns)}`;
+    };
+
+    const newUser = {
+      id,
+      app_metadata: {},
+      user_metadata: {
+        display_name: generateRandomName()
+      },
+      aud: id,
+      created_at: new Date().toISOString()
+    }
+
+    localStorage.setItem('user', JSON.stringify(newUser));
+    setUser(newUser);
+  }
+
   useEffect(() => {
     const fetchSessionAndUser = async () => {
       setLoading(true);
       try {
         // First, check if a session exists
         const { data: sessionData } = await supabase.auth.getSession();
+
         if (!sessionData?.session) {
-          console.warn("No active session found");
+          createTempUser();
           setLoading(false);
           return;
         }
@@ -105,6 +152,8 @@ export function AppWrapper({ children }: AppWrapperProps) {
     saveUser,
     logout
   };
+
+  if (loading) return <>Loading...</>
 
   return (
     <AppContext.Provider value={value}>
