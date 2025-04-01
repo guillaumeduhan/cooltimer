@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+* {
+  @apply outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:shadow-none #{!important};
+}
+
+
+body {
+  @apply text-woodsmoke-700 dark:text-woodsmoke-100 dark:bg-woodsmoke-950;
+  font-optical-sizing: auto;
+  font-family: "Geist", serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+}
+
+h3 {
+  @apply text-lg;
+}
+
+a {
+  @apply flex items-center gap-2 justify-between cursor-pointer transition duration-300;
+
+  &.active {
+    @apply text-black dark:text-white;
+
+    &:hover {
+      @apply text-woodsmoke-300;
+    }
+  }
+
+  &.inactive {
+    @apply text-woodsmoke-400 dark:text-woodsmoke-600;
+
+    &:hover {
+      @apply text-woodsmoke-300;
+    }
+  }
+}
+
+.auth {
+  h1 {
+    @apply text-[24px] font-[500];
+  }
+}
+
+table,
+tr,
+th,
+td,
+line {
+  @apply border-woodsmoke-800 #{!important};
+  stroke: grey;
+}
+
+button[role="combobox"] {
+  @apply border dark:bg-woodsmoke-900/50 dark:border-woodsmoke-900 rounded #{!important};
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+.DialogContent {
+  @apply w-full;
+  max-width: 100%;
+}
+
+.ping {
+  animation: ping 1s infinite;
+}
+
+@keyframes ping {
+
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.slide-right {
+  animation: slide-right 1s linear infinite;
+}

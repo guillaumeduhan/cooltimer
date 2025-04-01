@@ -1,0 +1,39 @@
+{
+  "short_name": "Okagents",
+  "name": "cooltimer",
+  "icons": [
+    {
+      "src": "/icons/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/icon-256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/icons/icon-384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "description": "Discover and compare the best AI agents with cooltimer. Explore pricing, features, and latest technologies in AI.",
+  "lang": "en"
+} 
