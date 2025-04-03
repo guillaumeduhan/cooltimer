@@ -2,7 +2,7 @@
 gt:
 	git add .
 	git commit -m "commit"
-	git push origin
+	git push --set-upstream origin main
 
 gtc:
 	git pull --no-ff
