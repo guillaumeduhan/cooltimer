@@ -14,15 +14,13 @@ html {
   @apply bg-black;
 }
 
-
 body {
-  @apply bg-no-repeat text-woodsmoke-900 bg-white dark:text-woodsmoke-100 dark:bg-gradient-to-br dark:from-woodsmoke-950 dark:to-black;
+  @apply bg-no-repeat text-woodsmoke-900 bg-white dark:text-woodsmoke-100 dark:bg-gradient-to-br dark:from-woodsmoke-950/95 dark:to-black;
   font-optical-sizing: auto;
   font-family: "Geist", serif;
   font-optical-sizing: auto;
   font-size: 16px;
 }
-
 
 a {
   @apply flex items-center gap-2 justify-between cursor-pointer transition duration-300;

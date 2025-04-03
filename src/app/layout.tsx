@@ -88,22 +88,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <AppWrapper>
-    <TimerProvider>
-      <ViewTransitions>
-        <html lang="en">
-          <head>
-            <script defer data-domain="cooltimer" src="https://plausible.io/js/script.js"></script>
-          </head>
-          <body className="min-h-screen">
+  return <html lang="en">
+    <head>
+      <script defer data-domain="cooltimer" src="https://plausible.io/js/script.js"></script>
+    </head>
+    <body className="min-h-screen">
+      <AppWrapper>
+        <TimerProvider>
+          <ViewTransitions>
             <Header />
             <main style={{ minHeight: 'calc(100vh - 80px)' }}>
               {children}
             </main>
             <Toaster richColors position="top-right" />
-          </body>
-        </html>
-      </ViewTransitions>
-    </TimerProvider>
-  </AppWrapper>
+          </ViewTransitions>
+        </TimerProvider>
+      </AppWrapper>
+    </body>
+  </html>
 }

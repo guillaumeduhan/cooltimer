@@ -1,4 +1,5 @@
 'use client';
+import Logo from '@/components/Logo';
 import supabase from '@/lib/supabase';
 import { User } from '@supabase/supabase-js';
 import { useRouter } from "next/navigation";
@@ -153,7 +154,9 @@ export function AppWrapper({ children }: AppWrapperProps) {
     logout
   };
 
-  if (loading) return <>Loading...</>
+  if (loading) return <div className="h-screen w-full bg-">
+    <Logo />
+  </div>
 
   return (
     <AppContext.Provider value={value}>

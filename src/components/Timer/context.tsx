@@ -4,9 +4,11 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface TimerContentObject {
   grow?: boolean;
@@ -16,11 +18,12 @@ interface TimerContentObject {
   s: string;
 }
 
-interface TimerRecord {
+export interface TimerRecord {
   id: string;
+  user_id?: string;
   tags?: string[];
   time: number;
-  timestamp: Date;
+  created_at: Date;
 }
 
 const TimerContext = createContext<any | undefined>(undefined);
@@ -41,7 +44,9 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const elapsedTimeRef = useRef<number>(0);
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
+  const [records, setRecords] = useState<TimerRecord[]>([]);
 
+  // Timer
   const start = useCallback(() => {
     if (!isRunning) {
       setIsRunning(true);
@@ -79,14 +84,15 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setIsRunning(false);
 
     const record: TimerRecord = {
-      id: Date.now().toString(),
+      id: uuidv4(),
       time: time,
-      timestamp: new Date(),
+      created_at: new Date()
     };
 
-    const records = JSON.parse(localStorage.getItem(STORAGE_KEYS) || '[]');
-    records.push(record);
-    localStorage.setItem(STORAGE_KEYS, JSON.stringify(records));
+    const localStorageRecords = JSON.parse(localStorage.getItem(STORAGE_KEYS) || '[]');
+    localStorageRecords.push(record);
+    setRecords((prev) => [record, ...prev]);
+    localStorage.setItem(STORAGE_KEYS, JSON.stringify(localStorageRecords));
 
     setTime(0);
     elapsedTimeRef.current = 0;
@@ -124,12 +130,22 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     </div>
   );
 
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEYS);
+    if (saved) {
+      const parsedRecords = JSON.parse(saved).map((r: any) => ({ ...r, timestamp: new Date(r.timestamp) }));
+      setRecords(parsedRecords);
+    }
+  }, []);
+
   return (
     <TimerContext.Provider
       value={{
         time,
         isRunning,
+        records,
         start,
+        setRecords,
         reset,
         save,
         pause,

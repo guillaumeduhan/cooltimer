@@ -2,10 +2,10 @@
 import { Button } from "../ui/button";
 import { useTimer } from "./context";
 
-const Clock = () => {
+const Clock = ({ children }: any) => {
   const { time, isRunning, start, pause, save, reset, formatTime } = useTimer();
 
-  return <div className="flex items-center justify-center gap-8 flex-col w-full" style={{ minHeight: 'calc(100vh - 80px)' }}>
+  return <div className="flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
     <div className="grid items-center gap-4 w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-600'} 
@@ -36,26 +36,15 @@ const Clock = () => {
         {isRunning ? <div className="w-full bg-gradient-to-r from-transparent dark:via-red-800 dark:via-red-600 dark:to-red-200 h-1 via-red-100 via-red-300 to-red-500 slide-right"></div> : ''}
       </div>
     </div>
-    <div className="flex gap-2 items-center">
-      <Button variant="outline" disabled={isRunning} onClick={() => save()}>Save</Button>
-      <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
+    <div className="group grid gap-4">
+      <div className="flex gap-2 items-center">
+        <Button variant="outline" disabled={isRunning} onClick={() => save()}>Save</Button>
+        <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
+      </div>
+      <div className="h-6 flex items-center justify-center">
+        {children}
+      </div>
     </div>
-    {/* <div className={`cursor-pointer hover:scale-105 transition duration-300 ${isRunning ? 'opacity-0' : ''}`}>
-      {!isRunning && time > 0 ? (
-        <div className="flex items-center gap-2 justify-center z-10 px-2 py-1 rounded-lg border border-gray-500/20 text-gray-500 bg-gradient-to-tr from-gray-400 to-gray-500 text-white w-full"
-          onClick={stop} // Stops & Resets Timer
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M2 12c0-4.714 0-7.071 1.4128-8.536C4.93 2 7.286 2 12 2s7.071 0 8.535 1.464C22 4.93 22 7.286 22 12s0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12" /></svg>
-          <span className="whitespace-nowrap font-[600] text-sm">Stop & Save</span>
-        </div>
-      ) : null}
-    </div>
-    <div className="w-full">
-      {formatTime(time, true)}
-    </div>
-    <div className="w-full h-[1px] bg-gray-800 relative">
-      {isRunning ? <div className="w-full bg-gradient-to-r from-gray-800 via-red-600 via-red-600 to-red-200 h-[1px] slide-right"></div> : ''}
-    </div> */}
   </div>
 };
 

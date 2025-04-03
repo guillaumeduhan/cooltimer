@@ -20,7 +20,7 @@ gmc:
 	git checkout -
 
 dev:
-	yarn dev
+	yarn dev --turbo
 
 create:
 	mkdir -p src/components/${NAME}
