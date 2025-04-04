@@ -90,3 +90,18 @@ button[role="combobox"] {
 .slide-right {
   animation: slide-right 1s linear infinite;
 }
+
+.animate-wiggle {
+  animation: wiggle 1500ms ease-in-out infinite;
+}
+
+@keyframes wiggle {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -15,7 +15,7 @@ const Timer = () => {
     </Clock>
     <div className={`relative overflow-hidden dark:border-woodsmoke-900 transition-all duration-700 ease-in-out max-h-[900px] overflow-y-auto ${open ? "lg:w-[800px] lg:border-l lg:border-t lg:border-b lg:rounded-l-xl" : "w-0"
       }`}>
-      <List />
+      <List {...{ open }} />
     </div>
   </div>
 };
