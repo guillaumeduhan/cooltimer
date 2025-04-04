@@ -1,19 +1,18 @@
 import { AppWrapper } from '@/app/context';
 import { TimerProvider } from '@/components/Timer/context';
 import type { Metadata } from "next";
-import { ViewTransitions } from 'next-view-transitions';
 import { Toaster } from 'sonner';
 import "./globals.scss";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cooltimer.app"),
   title: {
-    default: "Cooltimer.app | Smart Time Tracking",
-    template: "%s | Smart Time Tracking"
+    default: "Cooltimer.app | Free Smart Tracking App",
+    template: "%s | Free Smart Tracking App"
   },
-  description: "Track your time effortlessly with cooltimer.app. The smart time tracking solution that helps you manage projects, boost productivity, and achieve better work-life balance.",
+  description: "Track your time effortlessly with cooltimer.app. The Free Smart Tracking App solution that helps you manage projects, boost productivity, and achieve better work-life balance.",
   applicationName: "cooltimer.app",
-  authors: [{ name: "cooltimer.app Team", url: "https://www.cooltimer.app" }],
+  authors: [{ name: "Cooltimer.app Team", url: "https://www.cooltimer.app" }],
   generator: "Next.js",
   keywords: [
     "time tracking",
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://www.cooltimer.app",
-    title: "cooltimer.app | Smart Time Tracking",
+    title: "Cooltimer.app | Free Smart Tracking App",
     description: "Streamline your time tracking with cooltimer.app. The intelligent solution for project management and productivity tracking.",
     siteName: "cooltimer.app",
     images: [{
@@ -58,7 +57,7 @@ export const metadata: Metadata = {
   category: "Productivity",
   classification: "Business",
   other: {
-    abstract: "Smart Time Tracking Solution",
+    abstract: "Free Smart Tracking App Solution",
     archives: ["https://www.cooltimer.app/archives"],
     assets: ["https://www.cooltimer.app/"],
     bookmarks: ["https://www.cooltimer.app/"]
@@ -72,15 +71,13 @@ export default function RootLayout({
 }>) {
   return <html lang="en">
     <head>
-      <script defer data-domain="cooltimer" src="https://plausible.io/js/script.js"></script>
+      <script defer data-domain="cooltimer.app" src="https://plausible.io/js/script.js"></script>
     </head>
     <body className="min-h-screen">
       <TimerProvider>
         <AppWrapper>
-          <ViewTransitions>
-            {children}
-            <Toaster richColors position="top-right" />
-          </ViewTransitions>
+          {children}
+          <Toaster richColors position="top-right" />
         </AppWrapper>
       </TimerProvider>
     </body>

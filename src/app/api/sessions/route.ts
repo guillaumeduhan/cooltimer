@@ -12,17 +12,66 @@ export async function POST(req: NextRequest) {
         },
       });
     }
+    const {
+      id,
+      ip,
+      network,
+      version,
+      city,
+      region,
+      region_code,
+      country,
+      country_name,
+      country_code,
+      continent_code,
+      postal,
+      latitude,
+      longitude,
+      timezone,
+      utc_offset,
+      currency,
+      org,
+      display_name,
+      email,
+      position,
+      created_at,
+      ...rest
+    } = body;
+
     const { data, error } = await supabase
       .from('sessions')
-      .insert(body)
+      .insert({
+        id,
+        ip,
+        network,
+        version,
+        city,
+        region,
+        region_code,
+        country,
+        country_name,
+        country_code,
+        continent_code,
+        postal,
+        latitude,
+        longitude,
+        timezone,
+        utc_offset,
+        currency,
+        org,
+        display_name,
+        email,
+        position,
+        created_at
+      })
       .single();
+
+    if (error) throw error;
 
     const telegram = await fetch('https://qijhglvyquvxciafqpns.supabase.co/functions/v1/hyper-worker', {
       method: 'POST',
       body: JSON.stringify(body)
     });
-
-    if (error) throw error;
 
     return new NextResponse(JSON.stringify(data), {
       status: 201,

@@ -1,6 +1,6 @@
 'use client';
 import { useHelpers } from '@/hooks/useHelpers';
-import { Link, ViewTransitions } from 'next-view-transitions';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -33,9 +33,7 @@ export default function ProfileLayout({ children }: any) {
             {item.title}
           </Link>)}
         </div>
-        <ViewTransitions>
-          {children}
-        </ViewTransitions>
+        {children}
       </div>
     </div>
   </main>;

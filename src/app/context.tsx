@@ -102,8 +102,7 @@ export function AppWrapper({ children }: AppWrapperProps) {
 
       const newUser = {
         id,
-        display_name: generateRandomName(),
-        created_at: new Date().toISOString()
+        display_name: generateRandomName()
       };
 
       const res = await fetch('https://ipapi.co/json/');

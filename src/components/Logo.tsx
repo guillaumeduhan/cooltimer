@@ -16,7 +16,7 @@ const Logo: React.FC<LogoProps> = ({ width = 36, height = 36, alt = 'Logo' }) =>
     overflow: 'hidden'
   };
 
-  return <div className='rounded overflow-hidden' style={logoStyle} aria-label={alt} />;
+  return <div className='overflow-hidden' style={logoStyle} aria-label={alt} />;
 };
 
 export default Logo;

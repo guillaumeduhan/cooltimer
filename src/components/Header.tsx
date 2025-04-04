@@ -1,6 +1,6 @@
 'use client';
 import useAppContext from "@/app/context";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import DarkMode from "./DarkMode";
 import Logo from "./Logo";
 import User from "./User";
@@ -18,7 +18,7 @@ const Header = () => {
       <User />
     </div>
     <div className="flex items-center justify-between gap-4">
-      <Link href="/roadmap">Roadmap</Link>
+      <Link href="/roadmap" className="text-sm font-[500]">Roadmap</Link>
       <DarkMode />
     </div>
   </header>;

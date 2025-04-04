@@ -2,7 +2,7 @@
 import useAppContext from "@/app/context";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useHelpers } from "@/hooks/useHelpers";
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import { useTimer } from "./Timer/context";
 
 import { useEffect } from 'react';
