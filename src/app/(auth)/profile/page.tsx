@@ -12,14 +12,17 @@ import {
 import { Input } from '@/components/ui/input';
 import { useHelpers } from '@/hooks/useHelpers';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function ProfilePage() {
-  const { user, setUser, saveUser, logout } = useAppContext();
+  const { user, setUser, saveUser, logout, clearLocalStorage } = useAppContext();
   const { loading, setLoading } = useHelpers();
   const [data, setData] = useState<any>({
     position: "",
-    username: ""
+    display_name: "",
+    email: ""
   });
+  const [confirm, setConfirm] = useState<string>('');
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -29,23 +32,33 @@ export default function ProfilePage() {
     }));
   };
 
+  const onSaveUser = async () => {
+    try {
+      setLoading(true)
+      await saveUser(data);
+    } catch (error) {
+      toast.error("Sorry, an error occured.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     setData({
-      display_name: "",
-      username: ""
+      position: "",
+      display_name: ""
     })
   }, [])
 
   useEffect(() => {
     if (user) {
-      const { user_metadata } = user;
-      setData(user_metadata)
+      setData(user)
     }
   }, [user]);
 
   if (!user) return <div>Loading...</div>
 
-  return <div className="grid gap-6">
+  return <div className="grid gap-6 mb-12">
     <Card className="card">
       <CardHeader>
         <CardTitle>Display name</CardTitle>
@@ -66,7 +79,29 @@ export default function ProfilePage() {
         <ButtonComponent {...{
           loading,
           label: "Save",
-          onClick: () => saveUser({ user_metadata: data }),
+          onClick: () => onSaveUser(),
+          setUser
+        }} />
+      </CardFooter>
+    </Card>
+    <Card className="card">
+      <CardHeader>
+        <CardTitle>E-mail</CardTitle>
+        <CardDescription>Save your email for later.</CardDescription>
+      </CardHeader>
+      <CardContent className="grid gap-1 group transition duration-300">
+        <Input {...{
+          type: "email",
+          name: "email",
+          value: data?.email || '',
+          onChange: handleChange
+        }} />
+      </CardContent>
+      <CardFooter>
+        <ButtonComponent {...{
+          loading,
+          label: "Save",
+          onClick: () => onSaveUser(),
           setUser
         }} />
       </CardFooter>
@@ -74,7 +109,7 @@ export default function ProfilePage() {
     <Card className="card">
       <CardHeader>
         <CardTitle>Position</CardTitle>
-        <CardDescription>Please enter a position you are comfortable with.</CardDescription>
+        <CardDescription>It will be displayed under your displayed name.</CardDescription>
       </CardHeader>
       <CardContent>
         <Input {...{
@@ -88,12 +123,35 @@ export default function ProfilePage() {
         <ButtonComponent {...{
           loading,
           label: "Save",
-          onClick: () => saveUser({ user_metadata: data }),
+          onClick: () => onSaveUser(),
           setUser
         }} />
       </CardFooter>
     </Card>
-    <Card className="card">
+    <Card className="border-yellow-400 bg-yellow-50 dark:border-yellow-500 dark:bg-yellow-950/50">
+      <CardHeader>
+        <CardTitle>Clear Data</CardTitle>
+        <CardDescription>This will permanently erase all cached data, including your temporary user. This action cannot be undone.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm font-[600] text-black dark:text-white mb-2">Type here "Confirm" to unlock action</p>
+        <Input {...{
+          placeholder: "Confirm",
+          type: "text",
+          onChange: (e: any) => setConfirm(e.target.value)
+        }} />
+      </CardContent>
+      <CardFooter>
+        <ButtonComponent {...{
+          loading,
+          disabled: confirm !== 'Confirm',
+          className: "bg-yellow-400 dark:bg-yellow-500",
+          label: "Clear now",
+          onClick: () => clearLocalStorage()
+        }} />
+      </CardFooter>
+    </Card>
+    {/* <Card className="card">
       <CardHeader>
         <CardTitle>Logout</CardTitle>
         <CardDescription>If you want to logout.</CardDescription>
@@ -106,6 +164,6 @@ export default function ProfilePage() {
           setUser
         }} />
       </CardFooter>
-    </Card>
+    </Card> */}
   </div>
 }

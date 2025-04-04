@@ -77,6 +77,9 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [pause]);
 
   const save = useCallback(() => {
+    if (time === 0) {
+      return;
+    }
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -130,6 +133,14 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     </div>
   );
 
+  const deleteById = useCallback((id: string) => {
+    setRecords((prevRecords) => {
+      const updatedRecords = prevRecords.filter(record => record.id !== id);
+      localStorage.setItem(STORAGE_KEYS, JSON.stringify(updatedRecords));
+      return updatedRecords;
+    });
+  }, []);
+
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEYS);
     if (saved) {
@@ -150,7 +161,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         save,
         pause,
         formatTime,
-        getTimeFormat
+        getTimeFormat,
+        deleteById
       }}
     >
       {children}

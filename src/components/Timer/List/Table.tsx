@@ -6,7 +6,7 @@ import { TimerRecord, useTimer } from '../context';
 dayjs.extend(relativeTime);
 
 const ListTable = ({ records = [] }: any) => {
-  const { formatTime } = useTimer();
+  const { formatTime, deleteById } = useTimer();
   return <div className="w-full overflow-y-auto">
     {records.length === 0 && <div className="w-full flex items-center justify-center">
       <div className="grid gap-2 text-center py-12">
@@ -24,14 +24,14 @@ const ListTable = ({ records = [] }: any) => {
       {records.sort((a: TimerRecord, b: TimerRecord) => dayjs(a.created_at).diff(dayjs(b.created_at), 'second')).map((record: TimerRecord) => {
         const timeAgo = dayjs(record.created_at).fromNow();
         return (
-          <li key={record.id} className="group flex items-center border-l-4 border-transparent hover:border-gray-500 gap-4 px-4 min-h-12 items-center cursor-pointer transition duration-300 hover:bg-gray-700/25">
+          <li key={record.id} className="group flex items-center border-l-4 border-transparent hover:border-gray-500 gap-4 px-4 min-h-12 items-center cursor-pointer transition duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/25">
             <div className="font-[500] text-gray-500 w-1/4 whitespace-nowrap">{timeAgo}</div>
             <div className="grow w-2/4 whitespace-nowrap">
               {/* <TagsComponent tag={record.tag} onSelect={(tag: any) => updateRecordTag(record.id, tag)} /> */}
             </div>
             <div className="flex gap-2 items-center justify-end w-full whitespace-nowrap">
               <div className="hidden font-[600] text-sm group-hover:flex items-center justify center bg-gradient-to-tr hover:from-red-400 hover:via-red-500 hover:to-red-600 rounded px-2 py-1"
-              // onClick={() => removeRecordById(record.id)}
+                onClick={() => deleteById(record.id)}
               >
                 Delete
               </div>

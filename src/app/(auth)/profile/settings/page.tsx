@@ -29,8 +29,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (user) {
-      const { user_metadata } = user;
-      setData(user_metadata)
+      setData(user)
     }
   }, [user]);
 
@@ -47,9 +46,7 @@ export default function SettingsPage() {
             name="email_notifications"
             id="email_notifications"
             onCheckedChange={(b: boolean) => saveUser({
-              user_metadata: {
-                email_notifications: b
-              }
+              email_notifications: b
             })}
           />
         </header>

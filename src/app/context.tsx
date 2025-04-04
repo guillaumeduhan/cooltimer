@@ -1,22 +1,20 @@
 'use client';
-import Logo from '@/components/Logo';
+import Header from '@/components/Header';
+import Loading from '@/components/Loading';
 import supabase from '@/lib/supabase';
-import { User } from '@supabase/supabase-js';
+import { STORAGE_KEYS } from '@/shared/constants';
 import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 
-interface UserMetadata {
-  [key: string]: any;
-}
-
 interface AppContextType {
-  user: User | undefined;
+  user: any;
   loading: boolean;
+  clearLocalStorage: () => void;
   setLoading: (l: boolean) => void;
-  setUser: (user: User | undefined) => void;
-  saveUser: (params: { user_metadata: UserMetadata }) => Promise<any>;
+  setUser: (user: any) => void;
+  saveUser: (data: any) => Promise<any>;
   logout: () => Promise<boolean>;
 }
 
@@ -26,8 +24,16 @@ interface AppWrapperProps {
   children: ReactNode;
 }
 
+export function useAppContext(): AppContextType {
+  const context = useContext(AppContext);
+  if (context === undefined) {
+    throw new Error('useAppContext must be used within an AppWrapper');
+  }
+  return context;
+};
+
 export function AppWrapper({ children }: AppWrapperProps) {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<any>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
 
   const router = useRouter();
@@ -49,72 +55,87 @@ export function AppWrapper({ children }: AppWrapperProps) {
     }
   };
 
-  const saveUser = async ({ user_metadata }: { user_metadata: UserMetadata }): Promise<any> => {
+  const saveUser = async (data: any) => {
+    if (!user) return;
     try {
-      setLoading(true);
-      setUser((prev: any) => ({ ...prev, user_metadata }));
+      const updated = { ...user, ...data }
+      setUser(updated);
+      localStorage.setItem('user', JSON.stringify(updated));
 
-      // const { data, error } = await supabase.auth.updateUser({
-      //   data: user_metadata
-      // });
-
-      // if (error) throw error;
-
-      // if (data?.user) {
-      //   setUser(data.user);
-      //   toast.success('Profile saved successfully!');
-      //   return data;
-      // }
+      toast.success('Profile saved successfully!');
     } catch (error) {
       toast.error('Sorry, something wrong happened. Please try again.');
       throw error;
-    } finally {
-      setLoading(false);
     }
   };
 
-  const createTempUser = () => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      return setUser(JSON.parse(storedUser));
+  const createTempUser = async () => {
+    try {
+      setLoading(true);
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        return setUser(JSON.parse(storedUser));
+      }
+      const id = uuidv4();
+
+      function generateRandomName() {
+        const adjectives = [
+          "quick", "lazy", "sleepy", "noisy", "hungry", "brave", "shy", "clever", "silly", "graceful",
+          "curious", "gentle", "happy", "sad", "angry", "proud", "bright", "dark", "silent", "fancy",
+          "cool", "calm", "bold", "friendly", "loyal", "eager", "zany", "witty", "sharp", "quiet",
+          "tough", "kind", "nervous", "funny", "crazy", "jolly", "grumpy", "sneaky", "bouncy", "chilly",
+          "fierce", "soft", "wild", "tiny", "giant", "nimble", "swift", "clumsy", "dizzy", "mighty"
+        ];
+
+        const nouns = [
+          "tiger", "lion", "bear", "fox", "eagle", "shark", "dragon", "panther", "wolf", "leopard",
+          "owl", "koala", "zebra", "moose", "falcon", "whale", "octopus", "penguin", "crab", "phoenix",
+          "rabbit", "giraffe", "monkey", "donkey", "swan", "buffalo", "beetle", "rhino", "lobster", "antelope",
+          "camel", "duck", "lizard", "panda", "squid", "bat", "yak", "boar", "sloth", "iguana",
+          "seahorse", "crow", "goat", "chimp", "cobra", "flamingo", "porcupine", "puma", "toad", "hyena"
+        ];
+
+        const randomItem = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
+
+        return `${randomItem(adjectives)}-${randomItem(adjectives)}-${randomItem(nouns)}`;
+      };
+
+      const newUser = {
+        id,
+        display_name: generateRandomName(),
+        created_at: new Date().toISOString()
+      };
+
+      const res = await fetch('https://ipapi.co/json/');
+      const analytics = await res.json();
+
+      await fetch('/api/sessions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...newUser,
+          ...analytics,
+        }),
+      });
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+      setUser(newUser);
+    } catch (error) {
+
+    } finally {
+      setLoading(false);
     }
-    const id = uuidv4();
-
-    function generateRandomName() {
-      const adjectives = [
-        "quick", "lazy", "sleepy", "noisy", "hungry", "brave", "shy", "clever", "silly", "graceful",
-        "curious", "gentle", "happy", "sad", "angry", "proud", "bright", "dark", "silent", "fancy",
-        "cool", "calm", "bold", "friendly", "loyal", "eager", "zany", "witty", "sharp", "quiet",
-        "tough", "kind", "nervous", "funny", "crazy", "jolly", "grumpy", "sneaky", "bouncy", "chilly",
-        "fierce", "soft", "wild", "tiny", "giant", "nimble", "swift", "clumsy", "dizzy", "mighty"
-      ];
-
-      const nouns = [
-        "tiger", "lion", "bear", "fox", "eagle", "shark", "dragon", "panther", "wolf", "leopard",
-        "owl", "koala", "zebra", "moose", "falcon", "whale", "octopus", "penguin", "crab", "phoenix",
-        "rabbit", "giraffe", "monkey", "donkey", "swan", "buffalo", "beetle", "rhino", "lobster", "antelope",
-        "camel", "duck", "lizard", "panda", "squid", "bat", "yak", "boar", "sloth", "iguana",
-        "seahorse", "crow", "goat", "chimp", "cobra", "flamingo", "porcupine", "puma", "toad", "hyena"
-      ];
-
-      const randomItem = (arr: any) => arr[Math.floor(Math.random() * arr.length)];
-
-      return `${randomItem(adjectives)}-${randomItem(adjectives)}-${randomItem(nouns)}`;
-    };
-
-    const newUser = {
-      id,
-      app_metadata: {},
-      user_metadata: {
-        display_name: generateRandomName()
-      },
-      aud: id,
-      created_at: new Date().toISOString()
-    }
-
-    localStorage.setItem('user', JSON.stringify(newUser));
-    setUser(newUser);
   }
+
+  const clearLocalStorage = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem(STORAGE_KEYS);
+    createTempUser();
+    toast.success("Data successfully cleared!");
+    router.push('/');
+  };
 
   useEffect(() => {
     const fetchSessionAndUser = async () => {
@@ -148,29 +169,25 @@ export function AppWrapper({ children }: AppWrapperProps) {
   const value: AppContextType = {
     user,
     loading,
+    clearLocalStorage,
     setUser,
     setLoading,
     saveUser,
     logout
   };
 
-  if (loading) return <div className="h-screen w-full bg-">
-    <Logo />
+  if (loading) return <div className="h-screen w-full flex items-center justify-center">
+    <Loading />
   </div>
 
   return (
     <AppContext.Provider value={value}>
-      {children}
+      <Header />
+      <main style={{ minHeight: 'calc(100vh - 80px)' }}>
+        {children}
+      </main>
     </AppContext.Provider>
   );
-};
-
-export function useAppContext(): AppContextType {
-  const context = useContext(AppContext);
-  if (context === undefined) {
-    throw new Error('useAppContext must be used within an AppWrapper');
-  }
-  return context;
 };
 
 export default useAppContext;

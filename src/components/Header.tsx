@@ -2,13 +2,12 @@
 import useAppContext from "@/app/context";
 import { Link } from "next-view-transitions";
 import DarkMode from "./DarkMode";
-import Login from "./Login";
 import Logo from "./Logo";
 import User from "./User";
 
 const Header = () => {
   const { user } = useAppContext();
-  
+
   return <header className="flex items-center gap-8 justify-between p-4 z-100 min-h-16 max-h-16">
     <div className="flex items-center gap-4">
       <Link href={"/"}>
@@ -19,11 +18,9 @@ const Header = () => {
       <User />
     </div>
     <div className="flex items-center justify-between gap-4">
-      {!user && <div className="flex items-center justify-between gap-4">
-        <Login />
-      </div>}
+      <Link href="/roadmap">Roadmap</Link>
       <DarkMode />
     </div>
   </header>;
 }
-export default Header
+export default Header;

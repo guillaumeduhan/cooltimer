@@ -4,7 +4,7 @@ import Clock from "./Clock";
 import List from "./List";
 
 const Timer = () => {
-  const [open, setOpen] = useState<any>(true);
+  const [open, setOpen] = useState<boolean>(false);
 
   return <div className={`grid lg:flex`}>
     <Clock>

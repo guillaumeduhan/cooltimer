@@ -1,5 +1,4 @@
 import { AppWrapper } from '@/app/context';
-import Header from "@/components/Header";
 import { TimerProvider } from '@/components/Timer/context';
 import type { Metadata } from "next";
 import { ViewTransitions } from 'next-view-transitions';
@@ -37,11 +36,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.cooltimer.app",
   },
-  icons: [
-    { rel: "icon", url: "https://www.cooltimer.app/favicon.ico" },
-    { rel: "apple-touch-icon", url: "https://www.cooltimer.app/apple-touch-icon.png" }
-  ],
-  manifest: "https://www.cooltimer.app/manifest.json",
   openGraph: {
     type: "website",
     url: "https://www.cooltimer.app",
@@ -57,18 +51,6 @@ export const metadata: Metadata = {
     site: "@cooltimerapp",
     creator: "@cooltimerapp",
     images: "https://www.cooltimer.app/twitter-image.jpg"
-  },
-  facebook: {
-    appId: "12345678" // Assuming you have an actual App ID.
-  },
-  verification: {
-    google: "1234567890", // Example token, replace with your actual token.
-    yandex: "1234567890" // Example token, replace with your actual token.
-  },
-  appleWebApp: {
-    capable: true,
-    title: "cooltimer.app",
-    statusBarStyle: "black-translucent"
   },
   formatDetection: {
     telephone: false
@@ -93,17 +75,14 @@ export default function RootLayout({
       <script defer data-domain="cooltimer" src="https://plausible.io/js/script.js"></script>
     </head>
     <body className="min-h-screen">
-      <AppWrapper>
-        <TimerProvider>
+      <TimerProvider>
+        <AppWrapper>
           <ViewTransitions>
-            <Header />
-            <main style={{ minHeight: 'calc(100vh - 80px)' }}>
-              {children}
-            </main>
+            {children}
             <Toaster richColors position="top-right" />
           </ViewTransitions>
-        </TimerProvider>
-      </AppWrapper>
+        </AppWrapper>
+      </TimerProvider>
     </body>
   </html>
 }

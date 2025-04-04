@@ -9,14 +9,14 @@ const PROFILE_OPTIONS = [
     title: "General",
     route: "/profile"
   },
-  {
-    title: "Invoices",
-    route: "/profile/invoices"
-  },
-  {
-    title: "Preferences",
-    route: "/profile/settings"
-  },
+  // {
+  //   title: "Invoices",
+  //   route: "/profile/invoices"
+  // },
+  // {
+  //   title: "Preferences",
+  //   route: "/profile/settings"
+  // },
 ];
 
 export default function ProfileLayout({ children }: any) {
@@ -33,11 +33,9 @@ export default function ProfileLayout({ children }: any) {
             {item.title}
           </Link>)}
         </div>
-        <div className="">
-          <ViewTransitions>
-            {children}
-          </ViewTransitions>
-        </div>
+        <ViewTransitions>
+          {children}
+        </ViewTransitions>
       </div>
     </div>
   </main>;
