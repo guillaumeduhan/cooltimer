@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useLocalStorage } from 'react-use';
 
 const DarkMode = () => {
-  const [dark, setDark] = useState(false);
-  const [value, setValue] = useLocalStorage('dark-mode', false);
+  const [dark, setDark] = useState(true);
+  const [value, setValue] = useLocalStorage('dark-mode', true);
 
   useEffect(() => {
     if (value) setDark(value)
