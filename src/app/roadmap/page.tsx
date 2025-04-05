@@ -13,6 +13,11 @@ export default function RoadmapPage() {
       description: "Tags implementation."
     },
     {
+      date: "5th April, 2025",
+      version: '0.2.0',
+      description: "Increase global size, responsive improved."
+    },
+    {
       date: "4th April, 2025",
       version: '0.1.0',
       description: "Official launch of the timer. Thanks for your support."

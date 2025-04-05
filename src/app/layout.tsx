@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description: "Streamline your time tracking with cooltimer.app. The intelligent solution for project management and productivity tracking.",
     siteName: "cooltimer.app",
     images: [{
-      url: "https://www.cooltimer.app/og-image.jpg"
+      url: "https://www.cooltimer.app/twitter-image.jpg"
     }]
   },
   twitter: {
@@ -69,7 +69,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <html lang="en">
+  return <html lang="en" className="dark">
     <head>
       <script defer data-domain="cooltimer.app" src="https://plausible.io/js/script.js"></script>
     </head>

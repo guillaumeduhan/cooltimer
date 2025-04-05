@@ -114,7 +114,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 
   const getTimeFormat = ({ h, m, s, ms, grow }: TimerContentObject): any => (
-    <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[80px]' : 'text-[32px]'}`}>
+    <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[90px]' : 'text-[32px]'}`}>
       <div className="flex items-center">
         {h > 0 && (
           <div className="flex items-center">

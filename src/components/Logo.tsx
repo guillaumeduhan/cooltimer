@@ -6,11 +6,11 @@ interface LogoProps {
   alt?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ width = 36, height = 36, alt = 'Logo' }) => {
+const Logo: React.FC<LogoProps> = ({ width = 44, height = 44, alt = 'Logo' }) => {
   const logoStyle: React.CSSProperties = {
     width: `${width}px`,
     height: `${height}px`,
-    backgroundImage: 'url("/icons/512.png")',
+    backgroundImage: 'url("/icons/logo-2.png")',
     backgroundSize: 'cover', // Ensures the image covers the div completely
     backgroundPosition: 'center', // Centers the background image within the div
     overflow: 'hidden'

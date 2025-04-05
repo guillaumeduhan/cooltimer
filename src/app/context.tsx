@@ -10,9 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface AppContextType {
   user: any;
+  open: boolean;
   loading: boolean;
   clearLocalStorage: () => void;
   setLoading: (l: boolean) => void;
+  setOpen: (o: boolean) => void;
   setUser: (user: any) => void;
   saveUser: (data: any) => Promise<any>;
   logout: () => Promise<boolean>;
@@ -35,6 +37,7 @@ export function useAppContext(): AppContextType {
 export function AppWrapper({ children }: AppWrapperProps) {
   const [user, setUser] = useState<any>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(true);
 
   const router = useRouter();
 
@@ -167,8 +170,10 @@ export function AppWrapper({ children }: AppWrapperProps) {
 
   const value: AppContextType = {
     user,
+    open,
     loading,
     clearLocalStorage,
+    setOpen,
     setUser,
     setLoading,
     saveUser,
