@@ -40,7 +40,7 @@ export default function RoadmapPage() {
           if (part.match(/^@[\w]+$/)) {
             return (
               <Link
-                href={`https://twitter.com/${part.slice(1)}`}
+                href={`https://x.com/${part.slice(1)}?utm_source=cooltimer.app`}
                 target="_blank"
                 rel="noopener noreferrer"
                 key={`mention-${idx}-${i}`}
