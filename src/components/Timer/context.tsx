@@ -69,6 +69,14 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [isRunning]);
 
+  const toggleTimer = useCallback(() => {
+    if (isRunning) {
+      pause();
+    } else {
+      start();
+    }
+  }, [isRunning, pause, start]);
+
   const reset = useCallback(() => {
     pause();
     setTime(0);
@@ -149,6 +157,24 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
+  // Add keyboard event listener for space bar
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only trigger on space bar and prevent default behavior (scrolling)
+      if (event.code === 'Space') {
+        event.preventDefault();
+        toggleTimer();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Clean up the event listener when component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [toggleTimer]);
+
   return (
     <TimerContext.Provider
       value={{
@@ -162,7 +188,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         pause,
         formatTime,
         getTimeFormat,
-        deleteById
+        deleteById,
+        toggleTimer
       }}
     >
       {children}

@@ -68,6 +68,10 @@ button[role="combobox"] {
   animation: ping 1s infinite;
 }
 
+.user-highlight {
+  @apply bg-purple-500/20 text-purple-500 rounded-md px-1;
+}
+
 @keyframes ping {
 
   75%,

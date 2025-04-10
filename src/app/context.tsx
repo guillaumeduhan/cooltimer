@@ -111,16 +111,18 @@ export function AppWrapper({ children }: AppWrapperProps) {
       const res = await fetch('https://ipapi.co/json/');
       const analytics = await res.json();
 
-      await fetch('/api/sessions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...newUser,
-          ...analytics,
-        }),
-      });
+      if (process.env.NODE_ENV === 'production') {
+        await fetch('/api/sessions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...newUser,
+            ...analytics,
+          }),
+        });
+      }
 
       localStorage.setItem('user', JSON.stringify(newUser));
       setUser(newUser);
