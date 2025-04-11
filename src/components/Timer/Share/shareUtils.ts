@@ -18,8 +18,8 @@ export const shareTimerOnX = async (record: TimerRecord): Promise<void> => {
     //   lastWeek: '[Last] dddd',
     //   sameElse: '[On] MMM D'
     // });
-    // const tweetText = `${timeAgo}, I spent ${formatTime(record.time)} working — via cooltimer.app`;
-    const tweetText = `${formatTime(record.time)} — via cooltimer.app`;
+    // const tweetText = `${timeAgo}, I spent ${formatTime(record.time)} working — via timer.cool`;
+    const tweetText = `${formatTime(record.time)} — via timer.cool`;
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
     
     // Open in a popup window
@@ -45,7 +45,7 @@ export const shareTimerOnInstagram = async (record: TimerRecord): Promise<void> 
       return;
     }
 
-    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via cooltimer.app`;
+    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via timer.cool`;
     const shareUrl = `https://www.instagram.com/`;
     
     // Note: Instagram doesn't have a direct sharing API, so we'll just open the main page
@@ -71,7 +71,7 @@ export const shareTimerOnTelegram = async (record: TimerRecord): Promise<void> =
       return;
     }
 
-    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via cooltimer.app`;
+    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via timer.cool`;
     const shareUrl = `https://t.me/share/url?url=${encodeURIComponent('https://cooltimer.app')}&text=${encodeURIComponent(text)}`;
     
     const width = 600;
@@ -96,7 +96,7 @@ export const shareTimerOnPeerlist = async (record: TimerRecord): Promise<void> =
       return;
     }
 
-    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via cooltimer.app`;
+    const text = `${formatTime(record.time)}${record.tags?.[0] || ''} — via timer.cool`;
     const shareUrl = `https://peerlist.io/`;
     
     // Note: Peerlist doesn't have a direct sharing API, so we'll just open the main page
