@@ -1,4 +1,7 @@
 import { TimerRecord } from '../context';
+import dayjs from 'dayjs';
+import calendar from 'dayjs/plugin/calendar';
+dayjs.extend(calendar);
 
 export const shareTimerOnX = async (record: TimerRecord): Promise<void> => {
   try {
@@ -9,7 +12,14 @@ export const shareTimerOnX = async (record: TimerRecord): Promise<void> => {
     }
 
     // Create the share URL
-    const tweetText = `${formatTime(record.time)}${record.tags?.[0] || ''} — via cooltimer.app`;
+    // const timeAgo = dayjs(record.created_at).calendar(null, {
+    //   sameDay: '[Today]',
+    //   lastDay: '[Yesterday]',
+    //   lastWeek: '[Last] dddd',
+    //   sameElse: '[On] MMM D'
+    // });
+    // const tweetText = `${timeAgo}, I spent ${formatTime(record.time)} working — via cooltimer.app`;
+    const tweetText = `${formatTime(record.time)} — via cooltimer.app`;
     const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
     
     // Open in a popup window

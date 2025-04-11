@@ -15,6 +15,11 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "11th April, 2025",
+      version: '0.1.3',
+      description: ["Share on X — Instagram, Telegram, Peerlist coming soon."]
+    },
+    {
       date: "10th April, 2025",
       version: '0.1.2',
       description: ["Added space bar toggle timer @moodsprojects", "Feedback form", "Discord & Telegram link."]
