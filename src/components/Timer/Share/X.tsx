@@ -1,19 +1,17 @@
 "use client";
 import React from 'react';
-import { useTimer } from '../context';
+import { TimerRecord } from '../context';
 import { shareTimerOnX } from './shareUtils';
 
-const X = () => {
-  const { time } = useTimer();
+interface XProps {
+  record: TimerRecord;
+  className?: string;
+}
 
+const X = ({ record, className }: XProps) => {
   const handleShare = async () => {
     try {
-      await shareTimerOnX({
-        id: 'temp-id',
-        time,
-        created_at: new Date(),
-        tags: []
-      });
+      await shareTimerOnX(record);
     } catch (error) {
       console.error('Error sharing:', error);
     }
@@ -26,7 +24,7 @@ const X = () => {
       width="20" 
       height="20" 
       viewBox="0 0 24 24" 
-      className="text-woodsmoke-900 transition duration-300 hover:text-black dark:hover:text-white"
+      className={`text-woodsmoke-900 transition duration-300 hover:text-black dark:hover:text-white ${className}`}
     >
       <g fill="currentColor">
         <path d="M1 2h2.5L3.5 2h-2.5zM5.5 2h2.5L7.2 2h-2.5z">

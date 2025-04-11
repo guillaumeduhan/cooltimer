@@ -2,6 +2,7 @@
 import { Button } from "../ui/button";
 import { useTimer } from "./context";
 import Share from "./Share";
+import { v4 as uuidv4 } from 'uuid';
 
 const Clock = ({ children, open, setOpen }: any) => {
   const { time, share, isRunning, start, pause, save, reset, formatTime } = useTimer();
@@ -48,7 +49,7 @@ const Clock = ({ children, open, setOpen }: any) => {
         </Button>
       </div>
     </div>
-    <Share />
+    <Share record={{ id: uuidv4(), time, created_at: new Date() }} />
   </div>
 };
 
