@@ -2,6 +2,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TimerRecord, useTimer } from '../context';
+import X from "../Share/X";
 
 dayjs.extend(relativeTime);
 
@@ -30,6 +31,7 @@ const ListTable = ({ records = [] }: any) => {
               {/* <TagsComponent tag={record.tag} onSelect={(tag: any) => updateRecordTag(record.id, tag)} /> */}
             </div>
             <div className="flex gap-2 items-center justify-end w-full whitespace-nowrap">
+            <X className="hidden group-hover:flex" record={record} />
               <div className="hidden font-[600] text-sm group-hover:flex items-center justify center bg-gradient-to-tr hover:from-red-400 hover:via-red-500 hover:to-red-600 rounded px-2 py-1"
                 onClick={() => deleteById(record.id)}
               >

@@ -9,6 +9,7 @@ import React, {
   useState
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { shareTimerOnX } from '@/components/Timer/Share/shareUtils';
 
 interface TimerContentObject {
   grow?: boolean;
@@ -21,6 +22,7 @@ interface TimerContentObject {
 export interface TimerRecord {
   id: string;
   user_id?: string;
+  user_name?: string;
   tags?: string[];
   time: number;
   created_at: Date;
@@ -121,6 +123,15 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     []
   );
 
+  const share = async() => {
+    const record: TimerRecord = {
+      id: uuidv4(),
+      time,
+      created_at: new Date()
+    };
+    await shareTimerOnX(record);
+  }
+
   const getTimeFormat = ({ h, m, s, ms, grow }: TimerContentObject): any => (
     <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[90px]' : 'text-[32px]'}`}>
       <div className="flex items-center">
@@ -186,6 +197,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         reset,
         save,
         pause,
+        share,
         formatTime,
         getTimeFormat,
         deleteById,

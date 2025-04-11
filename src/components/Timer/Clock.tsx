@@ -1,9 +1,11 @@
 "use client";
 import { Button } from "../ui/button";
 import { useTimer } from "./context";
+import Share from "./Share";
+import { v4 as uuidv4 } from 'uuid';
 
 const Clock = ({ children, open, setOpen }: any) => {
-  const { time, isRunning, start, pause, save, reset, formatTime } = useTimer();
+  const { time, share, isRunning, start, pause, save, reset, formatTime } = useTimer();
 
   return <div className="flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
     <div className="grid items-center gap-4 w-full text-center">
@@ -42,11 +44,12 @@ const Clock = ({ children, open, setOpen }: any) => {
         }}>Save</Button>
         <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
         <Button variant="outline" onClick={() => setOpen(!open)}>
-          <span>{open ? 'Hide' : 'List'}</span>
+          {!open && <span>List</span>}
           <svg className={`${open ? '-rotate-90 lg:rotate-180' : 'rotate-90 lg:rotate-0'} transition-all duration-700`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" /></svg>
         </Button>
       </div>
     </div>
+    <Share record={{ id: uuidv4(), time, created_at: new Date() }} />
   </div>
 };
 
