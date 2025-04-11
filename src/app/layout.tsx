@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Toaster } from 'sonner';
 import "./globals.scss";
 import "../../public/fonts/stylesheet.css";
-import Social from '@/components/Timer/Social';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cooltimer.app"),

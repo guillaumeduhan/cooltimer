@@ -3,11 +3,27 @@ import { Button } from "../ui/button";
 import { useTimer } from "./context";
 import Share from "./Share";
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 
 const Clock = ({ children, open, setOpen }: any) => {
-  const { time, share, isRunning, start, pause, save, reset, formatTime } = useTimer();
+  const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
 
-  return <div className="flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        toggleTimer();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [toggleTimer]);
+
+  return <div className="clock-container flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
     <div className="grid items-center gap-4 w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-600'} 

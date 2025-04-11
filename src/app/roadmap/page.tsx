@@ -16,6 +16,11 @@ export default function RoadmapPage() {
     },
     {
       date: "11th April, 2025",
+      version: '0.1.4',
+      description: ["Fix: space bar toggle timer only on Clock, not everywhere."]
+    },
+    {
+      date: "11th April, 2025",
       version: '0.1.3',
       description: ["Share on X — Instagram, Telegram, Peerlist coming soon."]
     },

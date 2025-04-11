@@ -168,24 +168,6 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
-  // Add keyboard event listener for space bar
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      // Only trigger on space bar and prevent default behavior (scrolling)
-      if (event.code === 'Space') {
-        event.preventDefault();
-        toggleTimer();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    
-    // Clean up the event listener when component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [toggleTimer]);
-
   return (
     <TimerContext.Provider
       value={{
