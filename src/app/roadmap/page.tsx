@@ -7,7 +7,17 @@ export default function RoadmapPage() {
     {
       date: "Soon",
       version: 'X.X.X',
+      description: ["Teams implementation."]
+    }, 
+    {
+      date: "Soon",
+      version: 'X.X.X',
       description: ["Analytics implementation."]
+    },
+    {
+      date: "Soon",
+      version: 'X.X.X',
+      description: ["Create a free account.", "Save your timers."]
     }, 
     {
       date: "Soon",
