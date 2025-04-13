@@ -12,7 +12,7 @@ const List = ({ open, setOpen }: any) => {
 
   return <div className={`relative w-full h-full z-50 transition duration-300`}>
     {open && <div>
-      <header className="flex gap-4 px-6 py-4 border-b dark:border-woodsmoke-900 w-[900px] mb-2">
+      <header className="flex gap-4 px-6 py-4 border-b dark:border-woodsmoke-900 w-full lg:w-[900px] mb-2">
         <div>
           <h2 className="font-[600]">Timers</h2>
           <p className="text-woodsmoke-500">These events are currently saved locally on your computer.</p>

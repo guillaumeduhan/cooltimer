@@ -4,15 +4,39 @@ import { useTimer } from "./context";
 import Share from "./Share";
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
+import Suggestions from "../Suggestions";
 
 const Clock = ({ children, open, setOpen }: any) => {
   const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code === 'Space') {
-        event.preventDefault();
-        toggleTimer();
+      switch (event.code) {
+        case 'Space':
+          event.preventDefault();
+          toggleTimer();
+          break;
+        case 'KeyS':
+          if (!isRunning) {
+            event.preventDefault();
+            save();
+            setOpen(true);
+          }
+          break;
+        case 'KeyR':
+          if (!isRunning) {
+            event.preventDefault();
+            reset();
+          }
+          break;
+        case 'KeyP':
+          event.preventDefault();
+          toggleTimer();
+          break;
+        case 'KeyT':
+          event.preventDefault();
+          setOpen(!open);
+          break;
       }
     };
 
@@ -21,7 +45,7 @@ const Clock = ({ children, open, setOpen }: any) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [toggleTimer]);
+  }, [toggleTimer, save, setOpen, isRunning, reset, open]);
 
   return <div className="clock-container flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
     <div className="grid items-center gap-4 w-full text-center">
@@ -48,24 +72,23 @@ const Clock = ({ children, open, setOpen }: any) => {
       <div className="mx-auto">
         {formatTime(time, true)}
       </div>
-      <div className={`relative w-[128px] lg:w-full h-1 max-w-[500px] w-full bg-gradient-to-r mx-auto from-woodsmoke-200 to-woodsmoke-300 dark:from-woodsmoke-900 dark:to-woodsmoke-900/20 overflow-hidden`}>
+      <div className={`relative h-1 max-w-[500px] w-full bg-gradient-to-r mx-auto from-woodsmoke-200 to-woodsmoke-300 dark:from-woodsmoke-900 dark:to-woodsmoke-900/20 overflow-hidden`}>
         {isRunning ? <div className="w-full bg-gradient-to-r from-transparent dark:via-red-800 dark:via-red-600 dark:to-red-200 h-1 via-red-100 via-red-300 to-red-500 slide-right"></div> : ''}
       </div>
     </div>
-    <div className="group grid gap-4">
-      <div className="flex gap-2 items-center scale-125">
-        <Button variant="outline" disabled={isRunning} onClick={async () => {
-          await save();
-          setOpen(true);
-        }}>Save</Button>
-        <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
-        <Button variant="outline" onClick={() => setOpen(!open)}>
-          {!open && <span>List</span>}
-          <svg className={`${open ? '-rotate-90 lg:rotate-180' : 'rotate-90 lg:rotate-0'} transition-all duration-700`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" /></svg>
-        </Button>
-      </div>
+    <div className="group flex items-center scale-125 gap-2">
+      <Button variant="outline" disabled={isRunning} onClick={async () => {
+        await save();
+        setOpen(true);
+      }}>Save</Button>
+      <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
+      <Button variant="outline" onClick={() => setOpen(!open)}>
+        {!open && <span>List</span>}
+        <svg className={`${open ? '-rotate-90 lg:rotate-180' : 'rotate-90 lg:rotate-0'} transition-all duration-700`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" /></svg>
+      </Button>
     </div>
     <Share record={{ id: uuidv4(), time, created_at: new Date() }} />
+    <Suggestions />
   </div>
 };
 

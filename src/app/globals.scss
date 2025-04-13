@@ -103,6 +103,10 @@ button[role="combobox"] {
   animation: wiggle 1500ms ease-in-out infinite;
 }
 
+.key {
+  @apply dark:bg-transparent border dark:border-woodsmoke-800 dark:text-white rounded-md px-2 py-1;
+}
+
 @keyframes wiggle {
 
   0% {

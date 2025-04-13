@@ -25,6 +25,11 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "13th April, 2025",
+      version: '0.1.5',
+      description: ["Added keyboard shortcuts: Space/P to toggle timer, S to save (when stopped), R to reset (when stopped), T to toggle timer list."]
+    },
+    {
       date: "11th April, 2025",
       version: '0.1.4',
       description: ["Fix: space bar toggle timer only on Clock, not everywhere."]
