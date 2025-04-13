@@ -8,12 +8,12 @@ import "../../public/fonts/stylesheet.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cooltimer.app"),
   title: {
-    default: "Cooltimer.app | Free Smart Tracking App",
-    template: "%s | Free Smart Tracking App"
+    default: "Timer.cool | Time Tracking, Made Beautiful",
+    template: "%s | Timer.cool"
   },
-  description: "Track your time effortlessly with cooltimer.app. The Free Smart Tracking App solution that helps you manage projects, boost productivity, and achieve better work-life balance.",
-  applicationName: "cooltimer.app",
-  authors: [{ name: "Cooltimer.app Team", url: "https://www.cooltimer.app" }],
+  description: "Track your work, organize by tags, and get smart analytics. Stay focused with a simple timer that shows where your time really goes.",
+  applicationName: "timer.cool",
+  authors: [{ name: "Timer.cool Team", url: "https://www.cooltimer.app" }],
   generator: "Next.js",
   keywords: [
     "time tracking",
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
     "work hours tracker",
     "time sheet",
     "project time tracking",
-    "employee time tracking",
     "freelance time tracking",
-    "time management app",
-    "work time tracker",
-    "business time tracking",
+    "employee time tracking",
+    "smart time analytics",
+    "simple time tracker",
+    "tag-based tracking"
   ],
   referrer: "origin",
   creator: "Guillaume Duhan",
-  publisher: "cooltimer.app",
+  publisher: "timer.cool",
   robots: "index, follow",
   alternates: {
     canonical: "https://www.cooltimer.app",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://www.cooltimer.app",
-    title: "Cooltimer.app | Free Smart Tracking App",
-    description: "Streamline your time tracking with cooltimer.app. The intelligent solution for project management and productivity tracking.",
-    siteName: "cooltimer.app",
+    title: "Timer.cool | Time Tracking, Made Beautiful",
+    description: "Track your work, organize by tags, and get smart analytics. Stay focused with a simple timer that shows where your time really goes.",
+    siteName: "timer.cool",
     images: [{
       url: "https://www.cooltimer.app/twitter-image.jpg"
     }]
@@ -50,6 +50,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@cooltimerapp",
     creator: "@cooltimerapp",
+    title: "Timer.cool | Time Tracking, Made Beautiful",
+    description: "Track your work, organize by tags, and get smart analytics. Stay focused with a simple timer that shows where your time really goes.",
     images: "https://www.cooltimer.app/twitter-image.jpg"
   },
   formatDetection: {
@@ -58,7 +60,7 @@ export const metadata: Metadata = {
   category: "Productivity",
   classification: "Business",
   other: {
-    abstract: "Free Smart Tracking App Solution",
+    abstract: "Time Tracking, Made Beautiful",
     archives: ["https://www.cooltimer.app/archives"],
     assets: ["https://www.cooltimer.app/"],
     bookmarks: ["https://www.cooltimer.app/"]
