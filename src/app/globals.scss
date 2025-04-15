@@ -117,3 +117,52 @@ button[role="combobox"] {
     transform: rotate(360deg);
   }
 }
+
+@keyframes move-up {
+  0% {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.move-up-750 {
+  animation: move-up 750ms ease-out forwards;
+}
+
+.move-up-500 {
+  animation: move-up 1000ms ease-out forwards;
+}
+
+.move-up-1000 {
+  animation: move-up 1500ms ease-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 500ms ease-out forwards;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 4000ms linear infinite;
+}
