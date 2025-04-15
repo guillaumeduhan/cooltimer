@@ -86,7 +86,7 @@ const LandingPage = () => {
         ))}
       </div>
     </section>
-    <footer className="relative container fade-in mx-auto text-center grid gap-4">
+    <footer className="relative container fade-in mx-auto text-center grid gap-4 py-12">
       <div className="max-w-[300px] grid gap-2 mx-auto">
         <Image src={profile} alt="Guillaume Duhan" className="rounded-full size-[86px] mx-auto" />
         <p className="text-center text-woodsmoke-400 fade-in">My mission is to get over <span className="text-white font-[500]">1 Million</span> people around the world to use Timer.cool.</p>
