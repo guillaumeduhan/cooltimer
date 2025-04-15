@@ -28,7 +28,7 @@ const Header = () => {
       <User />
     </div>
     <div className="flex items-center justify-between gap-4">
-      {/* <Link href="/landing" className="hidden lg:flex text-sm font-[500]">About</Link> */}
+      <Link href="/landing" className="hidden lg:flex text-sm font-[500]">About</Link>
       <Link href="/roadmap" className="hidden lg:flex text-sm font-[500]">Roadmap</Link>
       <Link target="_blank" href="https://codeg.link/feedback" className="hidden lg:flex text-sm font-[500] border border-neutral-200 dark:border-neutral-800 rounded px-2 py-1">Feedback</Link>
       <DarkMode />
