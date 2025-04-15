@@ -1,6 +1,9 @@
+import { AppWrapper } from '@/app/context';
+import { TimerProvider } from '@/components/Timer/context';
 import type { Metadata } from "next";
-import "./globals.scss";
-import "../../public/fonts/stylesheet.css";
+import { Toaster } from 'sonner';
+import "../globals.scss";
+import "../../../public/fonts/stylesheet.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cooltimer.app"),
@@ -64,17 +67,17 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <html lang="en" className="dark">
-    <head>
-      <script defer data-domain="cooltimer.app" src="https://plausible.io/js/script.js"></script>
-    </head>
-    <body className="min-h-screen">
+  return <main className="min-h-screen">
+  <TimerProvider>
+    <AppWrapper>
       {children}
-    </body>
-  </html>
+      <Toaster richColors position="top-right" />
+    </AppWrapper>
+  </TimerProvider>
+</main>
 }

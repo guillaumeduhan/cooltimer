@@ -17,7 +17,7 @@ const Header = () => {
     <div className="flex items-center gap-4">
       <Link href={"/"}>
         <div className="relative overflow-hidden flex items-center justify-center rounded-full min-w-12 min-h-12 cursor-pointer hover:scale-110 transition duration-300">
-          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-fuchsia-400 to-emerald-500 animate-wiggle z-0" />
+          <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-fuchsia-500 to-emerald-400 animate-wiggle z-0" />
           <div className="relative z-10 rounded-full overflow-hidden">
             <Logo />
           </div>
@@ -28,6 +28,7 @@ const Header = () => {
       <User />
     </div>
     <div className="flex items-center justify-between gap-4">
+      {/* <Link href="/landing" className="hidden lg:flex text-sm font-[500]">About</Link> */}
       <Link href="/roadmap" className="hidden lg:flex text-sm font-[500]">Roadmap</Link>
       <Link target="_blank" href="https://codeg.link/feedback" className="hidden lg:flex text-sm font-[500] border border-neutral-200 dark:border-neutral-800 rounded px-2 py-1">Feedback</Link>
       <DarkMode />
