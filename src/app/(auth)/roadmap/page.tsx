@@ -1,6 +1,7 @@
 'use client';
 import Social from '@/components/Timer/Social';
 import dayjs from 'dayjs';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 export default function RoadmapPage() {
   const items = [
@@ -23,6 +24,11 @@ export default function RoadmapPage() {
       date: "Soon",
       version: 'X.X.X',
       description: ["Tags implementation."]
+    },
+    {
+      date: "18th April, 2025",
+      version: '0.1.6',
+      description: ["Fix: timer list not showing ordered by time @steellgold.", "Button to come back to timer from roadmap page added @lovekencode."]
     },
     {
       date: "13th April, 2025",
@@ -82,6 +88,12 @@ export default function RoadmapPage() {
   };
 
   return <div className="container max-w-[900px] grid gap-8 mx-auto">
+    <header className="flex items-center justify-between">
+      <Link href="/" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition duration-300">
+        <ArrowLeft />
+        Back to timer
+      </Link>
+    </header>
     <div className="grid gap-4 items-start">
       {items.map((item, index) => (
         <div key={index} className="items-start gap-2 px-4 lg:grid lg:grid-cols-12 border-b dark:border-woodsmoke-900 pb-4">

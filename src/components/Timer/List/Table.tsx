@@ -22,7 +22,7 @@ const ListTable = ({ records = [] }: any) => {
     </div>
     }
     {records.length > 0 && <ul className="grid gap-1 overflow-y-auto">
-      {records.sort((a: TimerRecord, b: TimerRecord) => dayjs(a.created_at).diff(dayjs(b.created_at), 'second')).map((record: TimerRecord) => {
+      {records.sort((a: TimerRecord, b: TimerRecord) => dayjs(b.created_at).diff(dayjs(a.created_at), 'second')).map((record: TimerRecord) => {
         const timeAgo = dayjs(record.created_at).fromNow();
         return (
           <li key={record.id} className="group flex items-center border-l-4 border-transparent hover:border-gray-500 gap-4 px-4 min-h-12 items-center cursor-pointer transition duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/25">
