@@ -135,7 +135,8 @@ export function AppWrapper({ children }: AppWrapperProps) {
 
   const clearLocalStorage = () => {
     localStorage.removeItem('user');
-    localStorage.removeItem(STORAGE_KEYS);
+    localStorage.removeItem(STORAGE_KEYS.RECORDS);
+    localStorage.removeItem(STORAGE_KEYS.TAGS);
     createTempUser();
     toast.success("Data successfully cleared!");
     router.push('/');

@@ -5,6 +5,7 @@ import Share from "./Share";
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import Suggestions from "../Suggestions";
+import Tags from "./Tags";
 
 const Clock = ({ children, open, setOpen }: any) => {
   const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
@@ -48,7 +49,7 @@ const Clock = ({ children, open, setOpen }: any) => {
   }, [toggleTimer, save, setOpen, isRunning, reset, open]);
 
   return <div className="clock-container flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
-    <div className="grid items-center gap-4 w-full text-center">
+    <div className="grid items-center w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-600'} 
           flex items-center justify-center max-w-48 max-h-48 w-full h-full rounded-full cursor-pointer hover:scale-105 duration-300 transition mx-auto`}
@@ -76,19 +77,20 @@ const Clock = ({ children, open, setOpen }: any) => {
         {isRunning ? <div className="w-full bg-gradient-to-r from-transparent dark:via-red-800 dark:via-red-600 dark:to-red-200 h-1 via-red-100 via-red-300 to-red-500 slide-right"></div> : ''}
       </div>
     </div>
-    <div className="group flex items-center scale-125 gap-2">
-      <Button variant="outline" disabled={isRunning} onClick={async () => {
-        await save();
-        setOpen(true);
-      }}>Save</Button>
-      <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
-      <Button variant="outline" onClick={() => setOpen(!open)}>
-        {!open && <span>List</span>}
-        <svg className={`${open ? '-rotate-90 lg:rotate-180' : 'rotate-90 lg:rotate-0'} transition-all duration-700`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" /></svg>
-      </Button>
+    <div>
+      <div className="group flex items-center gap-2 scale-125">
+        <Button variant="outline" disabled={isRunning} onClick={async () => {
+          await save();
+          setOpen(true);
+        }}>Save</Button>
+        <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
+        <Button variant="outline" onClick={() => setOpen(!open)}>
+          <svg className={`${open ? '-rotate-90 lg:rotate-180' : 'rotate-90 lg:rotate-0'} transition-all duration-700`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15L12.6 7.45L14 6l6 6z" /></svg>
+        </Button>
+      </div>
     </div>
-    <Share record={{ id: uuidv4(), time, created_at: new Date() }} />
     <Suggestions />
+    {/* <Share record={{ id: uuidv4(), time, created_at: new Date() }} /> */}
   </div>
 };
 

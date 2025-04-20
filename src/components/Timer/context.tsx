@@ -19,11 +19,19 @@ interface TimerContentObject {
   s: string;
 }
 
+export interface Tag {
+  id: string;
+  name: string;
+  color: string;
+  created_at: Date;
+  user_id?: string;
+}
+
 export interface TimerRecord {
   id: string;
   user_id?: string;
   user_name?: string;
-  tags?: string[];
+  tags?: Tag[];
   time: number;
   created_at: Date;
 }
@@ -40,13 +48,63 @@ export const useTimer = (): any => {
 
 export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [newTag, setNewTag] = useState<string>('');
   const [time, setTime] = useState<number>(0);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [currentTags, setCurrentTags] = useState<Tag[]>([]);
 
   const elapsedTimeRef = useRef<number>(0);
   const intervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const [records, setRecords] = useState<TimerRecord[]>([]);
+
+  // Load tags from localStorage on mount
+  useEffect(() => {
+    const savedTags = localStorage.getItem(STORAGE_KEYS.TAGS);
+    if (savedTags) {
+      const parsedTags = JSON.parse(savedTags).map((t: any) => ({ ...t, created_at: new Date(t.created_at) }));
+      setTags(parsedTags);
+    }
+  }, []);
+
+  // Save tags to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.TAGS, JSON.stringify(tags));
+  }, [tags]);
+
+  const createTag = useCallback((name: string, color: string, user_id?: string) => {
+    const newTag: Tag = {
+      id: uuidv4(),
+      name,
+      color,
+      created_at: new Date(),
+      user_id
+    };
+    setTags(prev => [...prev, newTag]);
+    return newTag;
+  }, []);
+
+  const updateTag = useCallback((id: string, updates: Partial<Tag>) => {
+    setTags(prev => prev.map(tag => 
+      tag.id === id ? { ...tag, ...updates } : tag
+    ));
+  }, []);
+
+  const deleteTag = useCallback((id: string) => {
+    setTags(prev => prev.filter(tag => tag.id !== id));
+    // Also remove from any records that have this tag
+    setRecords(prev => prev.map(record => ({
+      ...record,
+      tags: record.tags?.filter(tag => tag.id !== id)
+    })));
+  }, []);
+
+  const addTagToCurrentTimer = useCallback((tag: Tag) => {
+    setCurrentTags(prev => [...prev, tag]);
+  }, []);
+
+  const removeTagFromCurrentTimer = useCallback((tagId: string) => {
+    setCurrentTags(prev => prev.filter(tag => tag.id !== tagId));
+  }, []);
 
   // Timer
   const start = useCallback(() => {
@@ -99,17 +157,19 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const record: TimerRecord = {
       id: uuidv4(),
       time: time,
-      created_at: new Date()
+      created_at: new Date(),
+      tags: currentTags
     };
 
-    const localStorageRecords = JSON.parse(localStorage.getItem(STORAGE_KEYS) || '[]');
+    const localStorageRecords = JSON.parse(localStorage.getItem(STORAGE_KEYS.RECORDS) || '[]');
     localStorageRecords.push(record);
     setRecords((prev) => [record, ...prev]);
-    localStorage.setItem(STORAGE_KEYS, JSON.stringify(localStorageRecords));
+    localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(localStorageRecords));
 
     setTime(0);
+    setCurrentTags([]);
     elapsedTimeRef.current = 0;
-  }, [time, newTag]);
+  }, [time, currentTags]);
 
   const formatTime = useCallback(
     (seconds: number, grow: boolean): any => {
@@ -133,7 +193,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }
 
   const getTimeFormat = ({ h, m, s, ms, grow }: TimerContentObject): any => (
-    <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[90px]' : 'text-[32px]'}`}>
+    <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[90px]' : 'text-[28px]'}`}>
       <div className="flex items-center">
         {h > 0 && (
           <div className="flex items-center">
@@ -155,13 +215,13 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const deleteById = useCallback((id: string) => {
     setRecords((prevRecords) => {
       const updatedRecords = prevRecords.filter(record => record.id !== id);
-      localStorage.setItem(STORAGE_KEYS, JSON.stringify(updatedRecords));
+      localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(updatedRecords));
       return updatedRecords;
     });
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS);
+    const saved = localStorage.getItem(STORAGE_KEYS.RECORDS);
     if (saved) {
       const parsedRecords = JSON.parse(saved).map((r: any) => ({ ...r, timestamp: new Date(r.timestamp) }));
       setRecords(parsedRecords);
@@ -174,6 +234,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         time,
         isRunning,
         records,
+        tags,
+        currentTags,
         start,
         setRecords,
         reset,
@@ -183,10 +245,15 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         formatTime,
         getTimeFormat,
         deleteById,
-        toggleTimer
+        toggleTimer,
+        createTag,
+        updateTag,
+        deleteTag,
+        addTagToCurrentTimer,
+        removeTagFromCurrentTimer
       }}
     >
       {children}
-    </TimerContext.Provider >
+    </TimerContext.Provider>
   );
 };

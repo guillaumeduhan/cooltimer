@@ -9,12 +9,17 @@ export default function RoadmapPage() {
       date: "Soon",
       version: 'X.X.X',
       description: ["Teams implementation."]
-    }, 
+    },
     {
       date: "Soon",
       version: 'X.X.X',
       description: ["Analytics implementation."]
     },
+    {
+      date: "Soon",
+      version: 'X.X.X',
+      description: ["Add your own time record @steellgold."]
+    }, 
     {
       date: "Soon",
       version: 'X.X.X',
@@ -89,10 +94,11 @@ export default function RoadmapPage() {
 
   return <div className="container max-w-[900px] grid gap-8 mx-auto">
     <header className="flex items-center justify-between">
-      <Link href="/" className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition duration-300">
+      <Link href="/" className="text-woodsmoke-500 hover:text-woodsmoke-700 dark:hover:text-woodsmoke-300 transition duration-300">
         <ArrowLeft />
         Back to timer
       </Link>
+      <Social />
     </header>
     <div className="grid gap-4 items-start">
       {items.map((item, index) => (
@@ -107,6 +113,5 @@ export default function RoadmapPage() {
         </div>
       ))}
     </div>
-    <Social />
   </div>
 }
