@@ -31,9 +31,9 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
-      date: "Soon",
+      date: "20th April, 2025",
       version: '0.1.7',
-      description: ["Each timer has its own dedicated popup, and a new design will be implemented soon.."]
+      description: ["Each timer has its own dedicated popup, and a new design will be implemented soon."]
     },
     {
       date: "18th April, 2025",
