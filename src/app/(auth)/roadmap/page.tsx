@@ -31,6 +31,11 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "Soon",
+      version: '0.1.7',
+      description: ["Each timer has its own dedicated popup, and a new design will be implemented soon.."]
+    },
+    {
       date: "18th April, 2025",
       version: '0.1.6',
       description: ["Fix: timer list not showing ordered by time @steellgold.", "Button to come back to timer from roadmap page added @lovekencode."]
