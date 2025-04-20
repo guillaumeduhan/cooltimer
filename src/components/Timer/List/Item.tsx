@@ -30,7 +30,7 @@ const ListItem = ({ record }: { record: TimerRecord }) => {
             </Button>
           </DialogTrigger>
           <DialogContent>
-              <DialogTitle className="text-lg font-semibold">Timer Details</DialogTitle>
+            <DialogTitle className="text-lg font-semibold">Timer Details</DialogTitle>
             <div className="space-y-4">
               <div className="space-y-2">
                 <p><span className="font-medium">Time:</span> {formatTime(record.time, false)}</p>
