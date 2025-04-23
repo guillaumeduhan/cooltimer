@@ -8,9 +8,10 @@ const Timer = () => {
 
   return <div className={`grid lg:flex`}>
     <Clock {...{ open, setOpen }} />
-    <div className={`relative overflow-hidden dark:border-woodsmoke-900 transition-all duration-700 ease-in-out max-h-screen overflow-y-auto ${open ? "lg:w-[800px] lg:border-l lg:border-t lg:rounded-tl-xl" : "w-0"
+    <div className={`relative overflow-hidden dark:border-woodsmoke-900 transition-all duration-500 ease-in-out h-full max-h-[calc(100vh-74px)] overflow-y-auto ${open ? "opacity-100 lg:w-[800px] lg:border-l lg:border-t lg:rounded-tl-xl" : "opacity-0 lg:w-0"
       }`}>
       <List {...{ open, setOpen }} />
+      <div className="absolute bottom-0 sticky w-full h-24 z-50 bg-gradient-to-t from-black to-transparent"></div>
     </div>
   </div>
 };

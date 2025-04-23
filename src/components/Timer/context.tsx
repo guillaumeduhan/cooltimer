@@ -57,6 +57,42 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const startTimeRef = useRef<number | null>(null);
   const [records, setRecords] = useState<TimerRecord[]>([]);
 
+  // Generate fake records for testing
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && records.length === 0) {
+      const generateFakeRecords = () => {
+        const fakeRecords: TimerRecord[] = [];
+        const possibleTags: Tag[] = [
+          { id: '1', name: 'Work', color: '#FF5733', created_at: new Date() },
+          { id: '2', name: 'Study', color: '#33FF57', created_at: new Date() },
+          { id: '3', name: 'Exercise', color: '#3357FF', created_at: new Date() },
+          { id: '4', name: 'Reading', color: '#F033FF', created_at: new Date() },
+        ];
+
+        for (let i = 0; i < 100; i++) {
+          const randomTime = Math.floor(Math.random() * 7200); // Random time up to 2 hours
+          const randomDate = new Date();
+          randomDate.setDate(randomDate.getDate() - Math.floor(Math.random() * 30)); // Random date within last 30 days
+          
+          const record: TimerRecord = {
+            id: uuidv4(),
+            time: randomTime,
+            created_at: randomDate,
+            tags: Math.random() > 0.3 ? [possibleTags[Math.floor(Math.random() * possibleTags.length)]] : undefined
+          };
+          
+          fakeRecords.push(record);
+        }
+
+        return fakeRecords;
+      };
+
+      const fakeRecords = generateFakeRecords();
+      setRecords(fakeRecords);
+      localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(fakeRecords));
+    }
+  }, [records.length]);
+
   // Load tags from localStorage on mount
   useEffect(() => {
     const savedTags = localStorage.getItem(STORAGE_KEYS.TAGS);

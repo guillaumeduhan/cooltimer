@@ -67,7 +67,7 @@ const LandingPage = () => {
         </Link>
       <footer>
         <p className="text-sm text-woodsmoke-400 fade-in">
-          <span className="text-white font-[500]">835</span> track their time with Timer.cool — Last timer started 12 mins ago
+          <span className="text-white font-[500]">1002</span> track their time with Timer.cool — Last timer started 12 mins ago
         </p>
       </footer>
     </div>

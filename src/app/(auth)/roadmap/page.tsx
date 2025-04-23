@@ -19,16 +19,16 @@ export default function RoadmapPage() {
       date: "Soon",
       version: 'X.X.X',
       description: ["Add your own time record @steellgold."]
-    }, 
-    {
-      date: "Soon",
-      version: 'X.X.X',
-      description: ["Create a free account.", "Save your timers."]
-    }, 
+    },
     {
       date: "Soon",
       version: 'X.X.X',
       description: ["Tags implementation."]
+    },
+    {
+      date: "23th April, 2025",
+      version: '0.1.8',
+      description: ["Improved timer list, number of timers displayed."]
     },
     {
       date: "20th April, 2025",
