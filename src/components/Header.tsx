@@ -4,6 +4,7 @@ import Link from "next/link";
 import DarkMode from "./DarkMode";
 import Logo from "./Logo";
 import User from "./User";
+import TelegramLink from "./Social/Telegram";
 
 const Header = () => {
   const { user } = useAppContext();
@@ -13,7 +14,7 @@ const Header = () => {
     author: "Best, Guillaume"
   }
 
-  return <header className="flex items-center gap-8 justify-between p-4 z-100">
+  return <header className="group flex items-center gap-8 justify-between p-4 z-100">
     <div className="flex items-center gap-4">
       <Link href={"/"}>
         <div className="relative overflow-hidden flex items-center justify-center rounded-full min-w-12 min-h-12 cursor-pointer hover:scale-110 transition duration-300">
@@ -27,11 +28,11 @@ const Header = () => {
       <span className="text-[32px] text-neutral-700 font-[100]">/</span>
       <User />
     </div>
-    <div className="flex items-center justify-between gap-4">
-      {/* <Link href="/tags" className="hidden lg:flex text-sm font-[500]">Tags</Link> */}
-      <Link href="/landing" className="hidden lg:flex text-sm font-[500]">About</Link>
-      <Link href="/roadmap" className="hidden lg:flex text-sm font-[500]">Roadmap</Link>
-      <Link target="_blank" href="https://codeg.link/feedback" className="hidden lg:flex text-sm font-[500] border border-neutral-200 dark:border-neutral-800 rounded px-2 py-1">Feedback</Link>
+    <div className="hidden lg:flex items-center justify-between gap-4 text-sm text-woodsmoke-600">
+      <Link className="dark:hover:text-white" href="/landing">What is Timer.cool?</Link>
+      <Link className="dark:hover:text-white" href="/roadmap">Roadmap</Link>
+      <Link className="dark:hover:text-white" target="_blank" href="https://codeg.link/feedback">Feedback</Link>
+      <TelegramLink small />
       <DarkMode />
     </div>
   </header>;

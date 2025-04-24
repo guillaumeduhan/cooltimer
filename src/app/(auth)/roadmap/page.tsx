@@ -1,5 +1,4 @@
 'use client';
-import Social from '@/components/Timer/Social';
 import dayjs from 'dayjs';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
@@ -103,7 +102,6 @@ export default function RoadmapPage() {
         <ArrowLeft />
         Back to timer
       </Link>
-      <Social />
     </header>
     <div className="grid gap-4 items-start">
       {items.map((item, index) => (
