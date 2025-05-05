@@ -37,21 +37,11 @@ const LandingPage = () => {
         <div className="flex justify-start items-center gap-2">
           <span>Time</span>
           <div className="mx-auto">
-            <div className="relative overflow-hidden flex items-center justify-center rounded-full min-w-[64px] min-h-[64px] lg:min-w-[110px] lg:min-h-[110px] cursor-pointer hover:scale-120 transition duration-300">
-              <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-r from-fuchsia-500 to-emerald-400 animate-wiggle z-0" />
-              <div className="hidden lg:block relative z-10 rounded-full overflow-hidden">
-                <Logo {...{
-                  width: 100,
-                  height: 100
-                }} />
-              </div>
-              <div className="block lg:hidden relative z-10 rounded-full overflow-hidden">
-                <Logo {...{
-                  width: 54,
-                  height: 54
-                }} />
-              </div>
-            </div>
+            <Logo {...{
+              width: 96,
+              height: 96,
+              src: "./logo.png"
+            }} />
           </div>
           <span>Tracking</span>
         </div>
