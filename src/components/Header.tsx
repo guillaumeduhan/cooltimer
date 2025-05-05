@@ -5,6 +5,7 @@ import DarkMode from "./DarkMode";
 import Logo from "./Logo";
 import User from "./User";
 import TelegramLink from "./Social/Telegram";
+import Image from "next/image";
 
 const Header = () => {
   const { user } = useAppContext();
@@ -31,8 +32,10 @@ const Header = () => {
     <div className="hidden lg:flex items-center justify-between gap-4 text-sm text-woodsmoke-600">
       <Link className="dark:hover:text-white" href="/landing">What is Timer.cool?</Link>
       <Link className="dark:hover:text-white" href="/roadmap">Roadmap</Link>
-      <Link className="dark:hover:text-white" target="_blank" href="https://codeg.link/feedback">Feedback</Link>
-      <TelegramLink small />
+      <Link className="dark:hover:text-white" href="https://codeg.link/peerlist-timer" target="_blank">
+        <Image src="/peerlist.svg" alt="Peerlist" width={128} height={128} />
+      </Link>
+      {/* <Link className="dark:hover:text-white" target="_blank" href="https://codeg.link/feedback">Feedback</Link> */}
       <DarkMode />
     </div>
   </header>;
