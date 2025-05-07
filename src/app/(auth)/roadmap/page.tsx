@@ -25,6 +25,11 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "7th May, 2025",
+      version: '0.1.9',
+      description: ["First version of tags implemented: you'll be able to add tags soon."]
+    },
+    {
       date: "23th April, 2025",
       version: '0.1.8',
       description: ["Improved timer list, number of timers displayed."]

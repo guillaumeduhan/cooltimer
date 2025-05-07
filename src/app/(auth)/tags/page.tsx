@@ -14,7 +14,7 @@ export default function TagsPage() {
   return (
     <div className="container mx-auto grid gap-8 py-8 max-w-[900px] px-2">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Tags {tags.length > 0 ? `(${tags.length})` : '0'}</h1>
+        <h1 className="text-2xl font-bold">Tags ({tags.length > 0 ? `(${tags.length})` : '0'})</h1>
         <Button
           variant="outline"
           onClick={() => setIsFormOpen(!isFormOpen)}

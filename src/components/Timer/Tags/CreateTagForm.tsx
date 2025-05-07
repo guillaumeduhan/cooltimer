@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 interface CreateTagFormProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const MAX_NAME_LENGTH = 33;
