@@ -33,7 +33,7 @@ const List = ({ open, setOpen }: any) => {
         </h2>
         <p className="text-woodsmoke-500">{formattedTotalTime}</p>
       </header>
-      <main>
+      <main className="min-h-screen">
         <ListTable {...{ records }} />
       </main>
     </div>}
