@@ -25,7 +25,7 @@ const ListItem = ({ record }: { record: TimerRecord }) => {
       console.log(record)
     }, [record])
 
-    return <li key={record.id} className="group flex items-center border-l-4 border-transparent hover:border-woodsmoke-500 gap-2 px-4 min-h-12 items-center cursor-pointer transition duration-300 hover:bg-woodsmoke-100 dark:hover:bg-woodsmoke-700/25">
+    return <li key={record.id} className="group flex items-center border-l-4 border-transparent hover:border-woodsmoke-800 gap-2 px-4 min-h-12 items-center cursor-pointer transition duration-300 hover:bg-woodsmoke-100 dark:hover:bg-woodsmoke-700/25">
     <div className="min-w-[120px] font-[500] text-sm text-woodsmoke-500 whitespace-nowrap truncate">{timeAgo}</div>
     <div className="grow whitespace-nowrap">
       <TagsList {...{

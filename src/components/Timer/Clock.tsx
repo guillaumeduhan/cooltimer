@@ -51,7 +51,7 @@ const Clock = ({ children, open, setOpen }: any) => {
   return <div className="clock-container flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
     <div className="grid items-center w-full text-center">
       <div
-        className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-600'} 
+        className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-950'} 
           flex items-center justify-center max-w-48 max-h-48 w-full h-full rounded-full cursor-pointer hover:scale-105 duration-300 transition mx-auto`}
         onClick={isRunning ? pause : start}
       >

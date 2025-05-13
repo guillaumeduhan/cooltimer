@@ -11,7 +11,7 @@ interface TagProps {
 export const Tag = ({ tag, onDelete, className = "", small = false }: TagProps) => {
   return (
     <div 
-      className={`cursor-pointer dark:text-white font-[600] items-center gap-1 rounded-md capitalize ${className} ${small ? "text-[10px] px-1" : "text-[13px] px-2 py-1"}`}
+      className={`cursor-pointer dark:text-white font-[600] items-center gap-1 rounded-md capitalize ${className} ${small ? "text-[14px]" : "text-[16px]"} px-2 py-[2px]`}
       style={{ backgroundColor: tag.color + "20", border: `1px solid ${tag.color}` }}
     >
       <span>{tag.name}</span>

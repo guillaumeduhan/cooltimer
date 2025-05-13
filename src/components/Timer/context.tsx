@@ -88,8 +88,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       };
 
       const fakeRecords = generateFakeRecords();
-      // setRecords(fakeRecords);
-      // localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(fakeRecords));
+      setRecords(fakeRecords);
+      localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(fakeRecords));
     }
   }, [records.length]);
 

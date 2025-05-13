@@ -50,7 +50,7 @@ line {
 }
 
 button[role="combobox"] {
-  @apply border dark:bg-woodsmoke-900/50 dark:border-woodsmoke-900 rounded #{!important};
+  @apply border dark:bg-woodsmoke-900/50 dark:border-woodsmoke-800 rounded #{!important};
 }
 
 @layer base {

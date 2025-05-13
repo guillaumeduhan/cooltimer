@@ -38,8 +38,7 @@ const LandingPage = () => {
           <span>Time</span>
           <div className="mx-auto">
             <Logo {...{
-              width: 96,
-              height: 96,
+              size: 96,
               src: "./logo.png"
             }} />
           </div>

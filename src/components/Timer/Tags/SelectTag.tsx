@@ -25,7 +25,7 @@ const SelectTag = ({ onSelect, selectedTags = [] }: SelectTagProps) => {
               <Tag key={tag.id} tag={tag} small />
             ))}
             {selectedTags.length > 2 && (
-              <span className="flex items-center justify-center rounded-full border border-woodsmoke-900 text-xs px-2 py-1">
+              <span className="flex items-center justify-center rounded-full border border-woodsmoke-800 text-xs px-2 py-1">
                 +{selectedTags.length - 2}
               </span>
             )}

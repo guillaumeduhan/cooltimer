@@ -1,16 +1,15 @@
 import React from 'react';
 
 interface LogoProps {
-  width?: number;
-  height?: number;
+  size?: number;
   alt?: string;
   src?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ width = 40, height = 40, alt = 'Logo', src = '/logo.png' }) => {
+const Logo: React.FC<LogoProps> = ({ size = 40, alt = 'Logo', src = '/logo.png' }) => {
   const logoStyle: React.CSSProperties = {
-    width: `${width}px`,
-    height: `${height}px`,
+    width: `${size}px`,
+    height: `${size}px`,
     backgroundImage: `url(${src})`,
     backgroundSize: 'cover', // Ensures the image covers the div completely
     backgroundPosition: 'center', // Centers the background image within the div

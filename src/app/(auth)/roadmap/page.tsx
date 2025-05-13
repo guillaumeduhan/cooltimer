@@ -110,7 +110,7 @@ export default function RoadmapPage() {
     </header>
     <div className="grid gap-4 items-start">
       {items.map((item, index) => (
-        <div key={index} className="items-start gap-2 px-4 lg:grid lg:grid-cols-12 border-b dark:border-woodsmoke-900 pb-4">
+        <div key={index} className="items-start gap-2 px-4 lg:grid lg:grid-cols-12 border-b dark:border-woodsmoke-800 pb-4">
           <div className="lg:col-span-2 whitespace-nowrap flex items-center justify-start">
             <span className={`${item.date === 'Soon' ? 'font-[600] text-purple-500 bg-purple-900/20 border border-purple-600/50 block px-2 text-sm rounded-lg' : ''}`}>{item.date}</span>
           </div>
