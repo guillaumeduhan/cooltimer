@@ -55,11 +55,6 @@ const LandingPage = () => {
             </div>
           </div>
         </Link>
-      <footer>
-        <p className="text-sm text-woodsmoke-400 fade-in">
-          <span className="text-white font-[500]">1002</span> track their time with Timer.cool — Last timer started 12 mins ago
-        </p>
-      </footer>
     </div>
     <section className="relative fade-in mx-2">
       <div className="grid lg:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
