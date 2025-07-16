@@ -25,6 +25,11 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "16th July, 2025",
+      version: '0.2.0',
+      description: ["Update on brand & UI/UX."]
+    },
+    {
       date: "7th May, 2025",
       version: '0.1.9',
       description: ["First version of tags implemented: you'll be able to add tags soon."]

@@ -37,7 +37,7 @@ export function useAppContext(): AppContextType {
 export function AppWrapper({ children }: AppWrapperProps) {
   const [user, setUser] = useState<any>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
 
   const router = useRouter();
 
