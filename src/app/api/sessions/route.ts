@@ -68,10 +68,12 @@ export async function POST(req: NextRequest) {
 
     if (error) throw error;
 
-    const telegram = await fetch('https://www.guillaume.ceo/api/telegram', {
+    const response = await fetch('https://www.guillaume.ceo/api/telegram', {
       method: 'POST',
-      body: JSON.stringify(`🥷 New user from ${country}`)
+      body: `🥷 Timer.cool — New user from ${country_name}`
     });
+
+    console.log(response)
 
     return new NextResponse(JSON.stringify(data), {
       status: 201,

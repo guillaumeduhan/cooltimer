@@ -111,7 +111,7 @@ export function AppWrapper({ children }: AppWrapperProps) {
       const res = await fetch('https://ipapi.co/json/');
       const analytics = await res.json();
 
-      if (process.env.NODE_ENV === 'production') {
+      // if (process.env.NODE_ENV === 'production') {
         await fetch('/api/sessions', {
           method: 'POST',
           headers: {
@@ -122,7 +122,7 @@ export function AppWrapper({ children }: AppWrapperProps) {
             ...analytics,
           }),
         });
-      }
+      // }
 
       localStorage.setItem('user', JSON.stringify(newUser));
       setUser(newUser);
