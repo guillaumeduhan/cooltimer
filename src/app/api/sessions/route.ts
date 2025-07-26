@@ -73,8 +73,6 @@ export async function POST(req: NextRequest) {
       body: `🥷 Timer.cool — New user from ${country_name}`
     });
 
-    console.log(response)
-
     return new NextResponse(JSON.stringify(data), {
       status: 201,
       headers: {

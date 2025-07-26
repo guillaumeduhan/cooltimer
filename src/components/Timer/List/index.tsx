@@ -4,12 +4,14 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useTimer } from "../context";
 import ListTable from "./Table";
+import { Button } from "@/components/ui/button";
 
 dayjs.extend(relativeTime);
 dayjs.extend(duration);
 
-const List = ({ open, setOpen }: any) => {
-  const { records } = useTimer();
+const List = () => {
+  const { records, downloadAllTimers } = useTimer();
+
 
   const totalSeconds = records.reduce((acc: number, record: any) => acc + record.time, 0);
   const totalDuration = dayjs.duration(totalSeconds, 'seconds');
@@ -26,17 +28,20 @@ const List = ({ open, setOpen }: any) => {
         : `${minutes}min${seconds}sec tracked so far.`;
 
   return <div className={`relative w-full h-full z-50 transition duration-300`}>
-    {open && <div>
-      <header className="text-black dark:text-white gap-4 px-6 py-4 border-b dark:border-woodsmoke-800 w-full lg:w-[900px] mb-2">
-        <h2 className="font-[600]">
-          Timers ({records.length || 0})
-        </h2>
-        <p className="text-woodsmoke-500">{formattedTotalTime}</p>
+    <div>
+      <header className="flex items-center justify-between p-4 border-b border-woodsmoke-800 mb-4">
+        <div>
+          <h2 className="font-[600]">
+            Timers ({records.length || 0})
+          </h2>
+          <p className="text-woodsmoke-500">{formattedTotalTime}</p>
+        </div>
+        <Button variant="outline" onClick={downloadAllTimers}>Export as JSON</Button>
       </header>
-      <main className="min-h-screen">
+      <main>
         <ListTable {...{ records }} />
       </main>
-    </div>}
+    </div>
   </div>
 };
 

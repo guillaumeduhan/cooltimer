@@ -46,6 +46,22 @@ export const useTimer = (): any => {
   return context;
 };
 
+// ✅ Utility: Download JSON file
+const downloadTimersAsJSON = (records: TimerRecord[]) => {
+  const dataStr = JSON.stringify(records, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "timers.json";
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
 export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
@@ -70,9 +86,9 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         ];
 
         for (let i = 0; i < 100; i++) {
-          const randomTime = Math.floor(Math.random() * 7200); // Random time up to 2 hours
+          const randomTime = Math.floor(Math.random() * 7200);
           const randomDate = new Date();
-          randomDate.setDate(randomDate.getDate() - Math.floor(Math.random() * 30)); // Random date within last 30 days
+          randomDate.setDate(randomDate.getDate() - Math.floor(Math.random() * 30));
           
           const record: TimerRecord = {
             id: uuidv4(),
@@ -93,7 +109,6 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [records.length]);
 
-  // Load tags from localStorage on mount
   useEffect(() => {
     const savedTags = localStorage.getItem(STORAGE_KEYS.TAGS);
     if (savedTags) {
@@ -102,7 +117,6 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
-  // Save tags to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.TAGS, JSON.stringify(tags));
   }, [tags]);
@@ -127,7 +141,6 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const deleteTag = useCallback((id: string) => {
     setTags(prev => prev.filter(tag => tag.id !== id));
-    // Also remove from any records that have this tag
     setRecords(prev => prev.map(record => ({
       ...record,
       tags: record.tags?.filter(tag => tag.id !== id)
@@ -142,7 +155,6 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setCurrentTags(prev => prev.filter(tag => tag.id !== tagId));
   }, []);
 
-  // Timer
   const start = useCallback(() => {
     if (!isRunning) {
       setIsRunning(true);
@@ -226,7 +238,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       created_at: new Date()
     };
     await shareTimerOnX(record);
-  }
+  };
 
   const getTimeFormat = ({ h, m, s, ms, grow }: TimerContentObject): any => (
     <div className={`relative flex items-end ${grow ? 'min-h-[24px] text-[90px]' : 'text-[28px]'}`}>
@@ -255,6 +267,10 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return updatedRecords;
     });
   }, []);
+
+  const downloadAllTimers = useCallback(() => {
+    downloadTimersAsJSON(records);
+  }, [records]);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.RECORDS);
@@ -286,7 +302,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         updateTag,
         deleteTag,
         addTagToCurrentTimer,
-        removeTagFromCurrentTimer
+        removeTagFromCurrentTimer,
+        downloadAllTimers // ✅ Added here
       }}
     >
       {children}

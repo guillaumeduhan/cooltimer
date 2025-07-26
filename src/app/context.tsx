@@ -189,10 +189,7 @@ export function AppWrapper({ children }: AppWrapperProps) {
 
   return (
     <AppContext.Provider value={value}>
-      <Header />
-      <main style={{ minHeight: 'calc(100vh - 80px)' }}>
-        {children}
-      </main>
+      {children}
     </AppContext.Provider>
   );
 };

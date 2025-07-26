@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import Suggestions from "../Suggestions";
 import Tags from "./Tags";
 
-const Clock = ({ children, open, setOpen }: any) => {
+const Clock = ({ children }: any) => {
   const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
 
   useEffect(() => {
@@ -21,7 +21,6 @@ const Clock = ({ children, open, setOpen }: any) => {
           if (!isRunning) {
             event.preventDefault();
             save();
-            setOpen(true);
           }
           break;
         case 'KeyR':
@@ -36,7 +35,6 @@ const Clock = ({ children, open, setOpen }: any) => {
           break;
         case 'KeyT':
           event.preventDefault();
-          setOpen(!open);
           break;
       }
     };
@@ -46,9 +44,9 @@ const Clock = ({ children, open, setOpen }: any) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [toggleTimer, save, setOpen, isRunning, reset, open]);
+  }, [toggleTimer, save, isRunning, reset]);
 
-  return <div className="clock-container flex items-center justify-center gap-8 flex-col w-full grow py-12 px-2 lg:p-0 lg:min-h-[calc(100vh-64px)]">
+  return <div className="clock-container flex items-center justify-center gap-6 flex-col w-full grow p-16 lg:p-32">
     <div className="grid items-center w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-950'} 
@@ -73,20 +71,16 @@ const Clock = ({ children, open, setOpen }: any) => {
       <div className="mx-auto">
         {formatTime(time, true)}
       </div>
-      <div className={`relative h-1 max-w-[500px] w-full bg-gradient-to-r mx-auto from-woodsmoke-200 to-woodsmoke-300 dark:from-woodsmoke-900 dark:to-woodsmoke-900/20 overflow-hidden`}>
-        {isRunning ? <div className="w-full bg-gradient-to-r from-transparent dark:via-red-800 dark:via-red-600 dark:to-red-200 h-1 via-red-100 via-red-300 to-red-500 slide-right"></div> : ''}
+      <div className={`relative h-2 max-w-[500px] w-full bg-gradient-to-r mx-auto from-woodsmoke-200 to-woodsmoke-300 dark:from-woodsmoke-900 dark:to-woodsmoke-900/20 overflow-hidden`}>
+        {isRunning ? <div className="w-full bg-gradient-to-r from-transparent dark:via-red-800 dark:via-red-600 dark:to-red-200 h-full via-red-100 via-red-300 to-red-500 slide-right"></div> : ''}
       </div>
     </div>
     <div>
-      <div className="group flex items-center gap-2 scale-125">
+      <div className="group flex items-center gap-2">
         <Button variant="outline" disabled={isRunning} onClick={async () => {
           await save();
-          setOpen(true);
         }}>Save</Button>
         <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
-        <Button variant="outline" onClick={() => setOpen(!open)}>
-          List
-        </Button>
       </div>
     </div>
     <Suggestions />

@@ -25,6 +25,15 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "26th July, 2025",
+      version: "0.3.0",
+      description: [
+        "Added ability to export all timers as JSON and download as file.",
+        "Integrated download function into TimerProvider context.",
+        "Exposed `downloadAllTimers` for UI usage."
+      ]
+    },
+    {
       date: "16th July, 2025",
       version: '0.2.0',
       description: ["Update on brand & UI/UX."]
