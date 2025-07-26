@@ -68,9 +68,9 @@ export async function POST(req: NextRequest) {
 
     if (error) throw error;
 
-    const telegram = await fetch('https://qijhglvyquvxciafqpns.supabase.co/functions/v1/hyper-worker', {
+    const telegram = await fetch('https://www.guillaume.ceo/api/telegram', {
       method: 'POST',
-      body: JSON.stringify(body)
+      body: JSON.stringify(`🥷 New user from ${country}`)
     });
 
     return new NextResponse(JSON.stringify(data), {
