@@ -46,7 +46,7 @@ const Clock = ({ children }: any) => {
     };
   }, [toggleTimer, save, isRunning, reset]);
 
-  return <div className="clock-container flex items-center justify-center gap-6 flex-col w-full grow p-16 lg:p-32">
+  return <div className="clock-container flex items-center justify-center gap-6 flex-col pb-24 pt-16">
     <div className="grid items-center w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-950'} 

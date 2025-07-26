@@ -36,7 +36,20 @@
 // export default Header;
 
 'use client';
+
+import Link from "next/link";
+import Logo from "./Logo";
+
 const Header = () => {
-  return <div>New component with filename</div>;
+  return <header className=" transition duration-300 w-full fixed relative flex items-center justify-between p-4">
+    <Logo />
+    <Link
+      target="_blank"
+      href="https://www.guillaume.ceo"
+      className="pb-[1px] border-b-2 border-woodsmoke-800 font-[600]"
+    >
+      Guillaume.ceo
+    </Link>
+  </header>;
 }
 export default Header
