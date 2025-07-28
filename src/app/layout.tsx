@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description: "Track your work, organize by tags, and get smart analytics. Stay focused with a simple timer that shows where your time really goes.",
     siteName: "timer.cool",
     images: [{
-      url: "https://www.cooltimer.app/twitter-image.jpg"
+      url: "https://www.cooltimer.app/twitter.jpg"
     }]
   },
   twitter: {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     creator: "@cooltimerapp",
     title: "Timer.cool | Time Tracking, Made Beautiful",
     description: "Track your work, organize by tags, and get smart analytics. Stay focused with a simple timer that shows where your time really goes.",
-    images: "https://www.cooltimer.app/twitter-image.jpg"
+    images: "https://www.cooltimer.app/twitter.jpg"
   },
   formatDetection: {
     telephone: false
