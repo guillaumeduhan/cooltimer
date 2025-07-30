@@ -1,11 +1,8 @@
 "use client";
-import { Button } from "../ui/button";
-import { useTimer } from "./context";
-import Share from "./Share";
-import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import Suggestions from "../Suggestions";
-import Tags from "./Tags";
+import { Button } from "../ui/button";
+import { useTimer } from "./context";
 
 const Clock = ({ children }: any) => {
   const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
@@ -23,7 +20,7 @@ const Clock = ({ children }: any) => {
             save();
           }
           break;
-        case 'KeyR':
+        case 'KeyT':
           if (!isRunning) {
             event.preventDefault();
             reset();
@@ -33,14 +30,11 @@ const Clock = ({ children }: any) => {
           event.preventDefault();
           toggleTimer();
           break;
-        case 'KeyT':
-          event.preventDefault();
-          break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    
+
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };

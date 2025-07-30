@@ -1,14 +1,12 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
 
 const Suggestions = () => {
   const suggestions = [
     "Press <span class='key'>Space</span> key to start/stop",
     "Press <span class='key' >S</span> to save the timer",
-    "Press <span class='key' >R</span> to reset the timer",
-    "Press <span class='key' >P</span> to pause/resume",
-    "Press <span class='key' >T</span> to show/hide the timer list"
+    "Press <span class='key' >T</span> to reset the timer",
+    "Press <span class='key' >P</span> to pause/resume"
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,9 +43,9 @@ const Suggestions = () => {
 
   return (
     <div className="relative group grid items-center justify-center gap-2 cursor-pointer text-xs ">
-      <div 
+      <div
         className={`text-woodsmoke-800 w-full text-center transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`}
-        dangerouslySetInnerHTML={{ 
+        dangerouslySetInnerHTML={{
           __html: suggestions[currentIndex].replace(/<k>(.*?)<\/k>/g, '<span class="inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-medium border border-woodsmoke-200 rounded-md bg-woodsmoke-50 text-woodsmoke-800">$1</span>')
         }}
       />
