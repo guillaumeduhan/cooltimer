@@ -41,7 +41,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 
 const Header = () => {
-  return <header className=" transition duration-300 w-full fixed relative flex items-center justify-between p-4">
+  return <header className="cursor-pointer transition duration-300 w-full fixed relative flex items-center justify-between p-4">
     <Logo />
     <Link
       target="_blank"

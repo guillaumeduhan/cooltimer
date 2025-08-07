@@ -20,6 +20,10 @@ body {
   font-size: 16px;
 }
 
+button {
+  @apply px-6 py-2 rounded rounded cursor-pointer bg-woodsmoke-950 border border-woodsmoke-800 hover:scale-[102%] transition duration-300;
+}
+
 a {
   @apply flex items-center gap-2 justify-between cursor-pointer transition duration-300;
 
@@ -47,10 +51,6 @@ td,
 line {
   @apply border-woodsmoke-800 #{!important};
   stroke: grey;
-}
-
-button[role="combobox"] {
-  @apply border dark:bg-woodsmoke-900/50 dark:border-woodsmoke-800 rounded #{!important};
 }
 
 @layer base {

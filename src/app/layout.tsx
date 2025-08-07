@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.scss";
-import "../../public/fonts/stylesheet.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cooltimer.app"),

@@ -1,10 +1,9 @@
 "use client";
 import { useEffect } from 'react';
 import Suggestions from "../Suggestions";
-import { Button } from "../ui/button";
 import { useTimer } from "./context";
 
-const Clock = ({ children }: any) => {
+const Clock = () => {
   const { time, share, isRunning, start, pause, save, reset, formatTime, toggleTimer } = useTimer();
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const Clock = ({ children }: any) => {
     };
   }, [toggleTimer, save, isRunning, reset]);
 
-  return <div className="clock-container flex items-center justify-center gap-6 flex-col pb-24 pt-16">
+  return <div className="clock-container flex items-center justify-center gap-6 flex-col">
     <div className="grid items-center w-full text-center">
       <div
         className={`${isRunning ? 'bg-gradient-to-tr from-red-400 via-red-500 to-red-600 ' : 'bg-gradient-to-br from-woodsmoke-300 to-woodsmoke-950'} 
@@ -71,10 +70,10 @@ const Clock = ({ children }: any) => {
     </div>
     <div>
       <div className="group flex items-center gap-2">
-        <Button variant="outline" disabled={isRunning} onClick={async () => {
+        <button disabled={isRunning} onClick={async () => {
           await save();
-        }}>Save</Button>
-        <Button variant="outline" disabled={isRunning} onClick={() => reset()}>Reset</Button>
+        }}>Save</button>
+        <button disabled={isRunning} onClick={() => reset()}>Reset</button>
       </div>
     </div>
     <Suggestions />
