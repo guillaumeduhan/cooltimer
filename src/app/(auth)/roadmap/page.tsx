@@ -25,6 +25,20 @@ export default function RoadmapPage() {
       description: ["Tags implementation."]
     },
     {
+      date: "13th August, 2025",
+      version: "0.3.2",
+      description: [
+        "Added Minecraft banner for @steellgold.",
+      ]
+    },
+    {
+      date: "10th August, 2025",
+      version: "0.3.1",
+      description: [
+        "Added movies banner",
+      ]
+    },
+    {
       date: "26th July, 2025",
       version: "0.3.0",
       description: [

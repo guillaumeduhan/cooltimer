@@ -9,6 +9,7 @@ const backgrounds = [
   "GAMES OF THRONES.jpg",
   "LORD OF THE RINGS.jpg",
   "STAR WARS.jpg",
+  "MINECRAFT.jpg",
 ];
 
 function formatName(filename: string) {
