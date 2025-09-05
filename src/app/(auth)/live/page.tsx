@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import dayjs from 'dayjs';
 import { useEffect, useRef, useState } from 'react';
 
-const GOOGLE_FONTS = ['Hina Mincho', 'Creepster', 'Bayon'];
+const GOOGLE_FONTS = ['Geist', 'Roboto', 'Instrument Sans Serif'];
 
 export default function StyledLiveClock() {
   const [now, setNow] = useState<number>(() => Date.now());
@@ -48,43 +48,37 @@ export default function StyledLiveClock() {
   const dayProgress = (secondsSinceMidnight / totalSeconds) * 100;
 
   return (
-    <main className="min-h-screen flex flex-col gap-8">
-      <div className="opacity-5 hover:opacity-100 transition duration-300 cursor-pointer">
-        <Header />
+    <main className="relative min-h-screen flex flex-col gap-8">
+      <div
+        className="w-full mx-auto absolute top-0 left-0"
+        role="progressbar"
+        aria-label="Day progress"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Number(dayProgress.toFixed(2))}
+      >
+        <div className="h-4 w-full bg-white/10 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-emerald-800 via-emerald-600 to-emerald-200"
+            style={{ width: `${dayProgress}%` }}
+          />
+        </div>
+        <div className="w-full mt-2 px-2 text-center mx-auto flex justify-between text-white/50">
+          <span>{dayProgress.toFixed(1)}% of day is gone</span>
+        </div>
       </div>
-
-      <div className="grow flex flex-col items-center justify-center px-6">
+      <div className="grow w-full flex flex-col items-center justify-center px-6">
         <div>
 
           {/* Clock */}
           <div
-            className="flex mx-auto items-baseline font-[800] text-[32px] sm:text-[64px] md:text-[96px] lg:text-[228px]"
+            className="flex mx-auto items-baseline font-[600] text-[64px] md:text-[96px] lg:text-[264px]"
             style={{ fontFamily: font }}
           >
             <span>{hours}</span>
             <span>:</span>
             <span className="text-gray-400">{min}</span>
             <span className="text-gray-500 text-[20px]">, {seconds}</span>
-          </div>
-
-          {/* Day progress bar */}
-          <div
-            className="max-w-[160px] mx-auto"
-            role="progressbar"
-            aria-label="Day progress"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={Number(dayProgress.toFixed(2))}
-          >
-            <div className="h-1 w-full bg-white/10 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-emerald-800 via-emerald-600 to-emerald-200"
-                style={{ width: `${dayProgress}%` }}
-              />
-            </div>
-            <div className="mt-2 flex justify-between text-xs text-white/50">
-              <span>{dayProgress.toFixed(1)}%</span>
-            </div>
           </div>
 
           {/* Font selector */}
