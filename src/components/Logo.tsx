@@ -6,7 +6,7 @@ interface LogoProps {
   src?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = 40, alt = 'Logo', src = '/logo.png' }) => {
+const Logo: React.FC<LogoProps> = ({ size = 24, alt = 'Logo', src = '/logo.png' }) => {
   const logoStyle: React.CSSProperties = {
     width: `${size}px`,
     height: `${size}px`,

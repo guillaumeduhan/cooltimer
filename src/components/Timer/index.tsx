@@ -29,10 +29,10 @@ const Timer = () => {
   );
 
   return (
-    <div className="relative grid gap-8 move-up-500 overflow-hidden">
+    <div className="relative grid move-up-500 overflow-hidden">
+      <Header />
       <div>
-        <Header />
-        <div className="relative mx-8 rounded-xl grid gap-8 overflow-hidden">
+        <div className="relative mx-4 md:mx-6 rounded-xl grid gap-8 overflow-hidden">
           <div
             className="absolute flex items-end justify-end overflow-hidden z-10 w-full h-56 bg-cover bg-center bg-no-repeat rounded-xl transition duration-300 ease-in"
             style={{
