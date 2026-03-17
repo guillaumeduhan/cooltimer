@@ -38,12 +38,6 @@ export async function POST(req: NextRequest) {
       ...rest
     } = body;
 
-    const response = await fetch('https://www.guillaume.ceo/api/telegram', {
-      method: 'POST',
-      body: `🥷 Timer.cool — New user from ${country_name}`
-    });
-
-
     const { data, error } = await supabase
       .from('sessions')
       .insert({
