@@ -108,22 +108,6 @@ export function AppWrapper({ children }: AppWrapperProps) {
         display_name: generateRandomName()
       };
 
-      const res = await fetch('https://ipapi.co/json/');
-      const analytics = await res.json();
-
-      // if (process.env.NODE_ENV === 'production') {
-        await fetch('/api/sessions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...newUser,
-            ...analytics,
-          }),
-        });
-      // }
-
       localStorage.setItem('user', JSON.stringify(newUser));
       setUser(newUser);
     } catch (error) {
